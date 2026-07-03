@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  
+  --tg-theme-bg-color: #f8fafc;
+  --tg-theme-text-color: #0f172a;
+  --tg-theme-hint-color: #64748b;
+  --tg-theme-link-color: #0284c7;
+  --tg-theme-button-color: #0284c7;
+  --tg-theme-button-text-color: #ffffff;
+  --tg-theme-secondary-bg-color: #f1f5f9;
+}
+
+body {
+  background-color: var(--tg-theme-bg-color, var(--background));
+  color: var(--tg-theme-text-color, var(--foreground));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Telegram platform styles & safe area adjustments */
+.pb-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
+}
+
+.pt-safe {
+  padding-top: calc(env(safe-area-inset-top) + 12px);
+}
+
+/* Glassmorphism panel styling */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Custom premium badge styles */
+.premium-gradient {
+  background: linear-gradient(135deg, #fcd34d 0%, #d97706 100%);
+}
+
+.primary-gradient {
+  background: linear-gradient(135deg, #0c92e9 0%, #035ca1 100%);
+}

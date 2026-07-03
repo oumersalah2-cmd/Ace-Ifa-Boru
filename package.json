@@ -1,0 +1,21 @@
+{
+  "name": "ace-ifa-boru",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=packages/backend",
+    "dev:frontend": "npm run dev --workspace=packages/frontend",
+    "build:backend": "npm run build --workspace=packages/backend",
+    "build:frontend": "npm run build --workspace=packages/frontend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "prisma:generate": "npm run prisma:generate --workspace=packages/backend",
+    "prisma:migrate": "npm run prisma:migrate --workspace=packages/backend",
+    "prisma:seed": "npx tsx packages/backend/prisma/seed.ts"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,69 @@
+// prisma/schema.prisma
+// Provider: Supabase Postgres
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Core user record. PK is the Telegram user id itself — no separate UUID needed
+/// since Telegram ids are globally unique and this is how initData identifies users.
+model User {
+  telegramId    BigInt    @id @map("telegram_id")
+  username      String?
+  firstName     String?   @map("first_name")
+  lastName      String?   @map("last_name")
+  languageCode  String?   @map("language_code")
+  photoUrl      String?   @map("photo_url")
+
+  isPremium     Boolean   @default(false) @map("is_premium")
+  premiumUntil  DateTime? @map("premium_until")
+
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  examSessions  ExamSession[]
+
+  @@map("users")
+}
+
+model Question {
+  id                  String   @id @default(uuid()) @db.Uuid
+  subject             String
+  topic               String
+  questionText         String   @map("question_text")
+  options             Json     // JSONB array of strings, e.g. ["A", "B", "C", "D"]
+  correctOptionIndex  Int      @map("correct_option_index")
+  explanation         String?
+  isFree              Boolean  @default(false) @map("is_free")
+
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  @@index([subject, topic])
+  @@map("questions")
+}
+
+model ExamSession {
+  id              String    @id @default(uuid()) @db.Uuid
+  userId          BigInt    @map("user_id")
+  user            User      @relation(fields: [userId], references: [telegramId])
+
+  subject         String?
+  questionIds     Json      @map("question_ids")     // ordered array of question UUIDs in this session
+  currentAnswers  Json      @default("{}") @map("current_answers") // { [questionId]: selectedOptionIndex }
+
+  score           Int       @default(0)
+  isCompleted     Boolean   @default(false) @map("is_completed")
+
+  startedAt       DateTime  @default(now()) @map("started_at")
+  completedAt     DateTime? @map("completed_at")
+  expiresAt       DateTime? @map("expires_at") // for timed exams
+
+  @@index([userId, isCompleted])
+  @@map("exam_sessions")
+}
