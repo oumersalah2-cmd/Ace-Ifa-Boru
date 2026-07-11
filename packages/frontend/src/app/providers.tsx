@@ -51,7 +51,6 @@ function SplashScreen() {
           borderRadius: "50%",
           border: "3px solid transparent",
           borderTopColor: "#f59e0b",
-          animation: "spin 1s linear infinite",
         }} />
         <div style={{
           position: "absolute",
@@ -84,7 +83,7 @@ function SplashScreen() {
         letterSpacing: 0.3,
       }}>Boarding Secondary School</p>
 
-      {/* Animated dots */}
+      {/* Static dots */}
       <div style={{ display: "flex", gap: 6, marginTop: 32 }}>
         {[0, 1, 2].map((i) => (
           <div key={i} style={{
@@ -92,7 +91,6 @@ function SplashScreen() {
             height: 7,
             borderRadius: "50%",
             background: "#f59e0b",
-            animation: `bounce 1.2s ease-in-out ${i * 0.2}s infinite`,
           }} />
         ))}
       </div>
