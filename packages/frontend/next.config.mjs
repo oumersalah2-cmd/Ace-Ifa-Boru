@@ -8,6 +8,15 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  // Proxy all /api/* requests to the local backend so only one ngrok tunnel is needed
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:4000/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
