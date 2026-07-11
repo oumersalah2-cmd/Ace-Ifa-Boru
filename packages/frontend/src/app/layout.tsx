@@ -1,7 +1,9 @@
 // src/app/layout.tsx
 import type { Metadata, Viewport } from "next";
-import { Providers } from "./providers";
+import dynamic from "next/dynamic";
 import "./globals.css";
+
+const Providers = dynamic(() => import("./providers").then((mod) => mod.Providers), { ssr: false });
 
 export const metadata: Metadata = {
   title: "ExamPrep",
