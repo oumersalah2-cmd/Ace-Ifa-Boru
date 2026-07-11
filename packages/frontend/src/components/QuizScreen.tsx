@@ -8,6 +8,7 @@ import { useAuth } from "@/app/providers";
 import { useMainButtonControl, useBackButtonControl, useHaptics } from "@/hooks/useTelegramControls";
 import { useCountdown } from "@/hooks/useCountdown";
 import { Paywall } from "@/components/Paywall";
+import { ChevronLeft } from "lucide-react";
 
 interface Question {
   id: string;
@@ -80,12 +81,12 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
   }, [isLast, handleFinishExam]);
 
   const goBackCategory = useCallback(() => {
-    router.push("/categories");
+    router.push("/");
   }, [router]);
 
   // Native Telegram MainButton drives progression through the quiz.
   useMainButtonControl({
-    text: isLast ? "Finish Exam" : "Next Question",
+    text: isLast ? "Qormaata Xumuri" : "Gaaffii Itti Aanu",
     onClick: goNext,
     enabled: selected !== undefined,
     visible: !paywalled,
@@ -108,10 +109,18 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
   return (
     <div className="flex flex-col h-full px-4 pt-4 pb-safe">
       {/* Progress + timer */}
-      <div className="flex items-center justify-between mb-2 text-xs text-slate-500">
-        <span>
-          Question {index + 1} / {questions.length}
-        </span>
+      <div className="flex items-center justify-between mb-3 text-xs text-slate-500">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={goBackCategory}
+            className="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-700 active:scale-90 transition-transform"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <span className="font-semibold text-slate-600">
+            Gaaffii {index + 1} / {questions.length}
+          </span>
+        </div>
         <span
           className={`font-mono tabular-nums font-medium ${
             isExpired ? "text-red-500" : minutes < 1 ? "text-amber-500" : "text-slate-700"
@@ -163,9 +172,9 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
 
       {/* Autosave micro-feedback (haptics fire above; this is the visual echo) */}
       <div className="mt-4 h-5 text-xs">
-        {feedback === "saving" && <span className="text-slate-400">Saving…</span>}
-        {feedback === "saved" && <span className="text-emerald-600">Answer saved ✓</span>}
-        {feedback === "error" && <span className="text-red-500">Couldn't save — check connection</span>}
+        {feedback === "saving" && <span className="text-slate-400">Ol-kaayamaa jira...</span>}
+        {feedback === "saved" && <span className="text-emerald-600">Deebiin ol-kaayameera ✓</span>}
+        {feedback === "error" && <span className="text-red-500">Ol-kaayuu hin dandeenye — qunnamtii kee mirkaneessi</span>}
       </div>
 
       {/* Spacer so content never sits under Telegram's native MainButton */}
