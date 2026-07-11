@@ -25,6 +25,91 @@ const AuthContext = createContext<AuthState>({
 
 export const useAuth = () => useContext(AuthContext);
 
+// Beautiful animated splash/loading screen shown while auth is in progress
+function SplashScreen() {
+  return (
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "100vh",
+      background: "linear-gradient(135deg, #1a237e 0%, #0d47a1 50%, #1565c0 100%)",
+      fontFamily: "'Inter', sans-serif",
+    }}>
+      {/* Animated logo ring */}
+      <div style={{ position: "relative", width: 96, height: 96, marginBottom: 28 }}>
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "50%",
+          border: "3px solid rgba(255,255,255,0.15)",
+        }} />
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "50%",
+          border: "3px solid transparent",
+          borderTopColor: "#f59e0b",
+          animation: "spin 1s linear infinite",
+        }} />
+        <div style={{
+          position: "absolute",
+          inset: 8,
+          borderRadius: "50%",
+          background: "rgba(255,255,255,0.1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 32,
+        }}>
+          📚
+        </div>
+      </div>
+
+      {/* App name */}
+      <h1 style={{
+        color: "#ffffff",
+        fontSize: 22,
+        fontWeight: 700,
+        margin: 0,
+        letterSpacing: 0.5,
+      }}>Ace Ifa Boru</h1>
+
+      {/* Subtitle */}
+      <p style={{
+        color: "rgba(255,255,255,0.6)",
+        fontSize: 13,
+        margin: "6px 0 0",
+        letterSpacing: 0.3,
+      }}>Boarding Secondary School</p>
+
+      {/* Animated dots */}
+      <div style={{ display: "flex", gap: 6, marginTop: 32 }}>
+        {[0, 1, 2].map((i) => (
+          <div key={i} style={{
+            width: 7,
+            height: 7,
+            borderRadius: "50%",
+            background: "#f59e0b",
+            animation: `bounce 1.2s ease-in-out ${i * 0.2}s infinite`,
+          }} />
+        ))}
+      </div>
+
+      <style>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+        @keyframes bounce {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+          40% { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
+}
+
 function AuthBridge({ children }: { children: ReactNode }) {
   const launchParams = useLaunchParams();
   const [state, setState] = useState<{
@@ -69,7 +154,6 @@ function AuthBridge({ children }: { children: ReactNode }) {
   useEffect(() => {
     const rawInitData = launchParams?.initDataRaw;
     if (!rawInitData) {
-      // Fallback for development/browser environments
       loadAuth("mock_development_mode");
       return;
     }
@@ -91,6 +175,9 @@ function AuthBridge({ children }: { children: ReactNode }) {
       console.error("Failed to refresh premium status", e);
     }
   };
+
+  // Show splash while loading
+  if (state.loading) return <SplashScreen />;
 
   return (
     <AuthContext.Provider value={{ ...state, refreshPremiumStatus }}>
@@ -157,6 +244,8 @@ function MockAuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  if (state.loading) return <SplashScreen />;
+
   return (
     <AuthContext.Provider value={{ ...state, refreshPremiumStatus }}>
       {children}
@@ -187,16 +276,6 @@ class SafeSDKProvider extends Component<{ children: ReactNode; fallback: ReactNo
 }
 
 export function Providers({ children }: { children: ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div className="flex items-center justify-center h-screen bg-slate-50 text-slate-400">Initializing...</div>;
-  }
-
   return (
     <SafeSDKProvider fallback={<MockAuthProvider>{children}</MockAuthProvider>}>
       <SDKProvider acceptCustomStyles debug={process.env.NODE_ENV === "development"}>

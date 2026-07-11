@@ -62,7 +62,7 @@ export default function AnalyticsDashboard() {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-slate-50">
         <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-        <p className="mt-4 text-sm text-slate-500 font-medium">Loading analytics dashboard...</p>
+        <p className="mt-4 text-sm text-slate-500 font-medium">Gabaasa xiinxalaa fidaa jira...</p>
       </div>
     );
   }
@@ -81,22 +81,22 @@ export default function AnalyticsDashboard() {
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
-        <span className="text-sm font-semibold text-slate-700">Back</span>
+        <span className="text-sm font-semibold text-slate-700">Gara duubaa</span>
       </div>
 
       {/* Title */}
       <h1 className="text-xl font-extrabold text-slate-950 flex items-center gap-2 mb-6">
         <BarChart3 className="w-6 h-6 text-blue-600" />
-        Performance Analytics
+        Xiinxala Guddinaa
       </h1>
 
       {/* Main Performance Ring Card */}
       <div className="bg-white rounded-3xl border border-slate-150 p-6 flex items-center justify-between shadow-sm mb-6">
         <div>
-          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Overall Proficiency</h3>
+          <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Dandeettii Waliigalaa</h3>
           <p className="text-3xl font-black text-slate-950 mt-1">{overallAvg}%</p>
           <p className="text-xs text-slate-500 mt-2 max-w-[180px] leading-relaxed">
-            Average accuracy calculated across all completed practice sets.
+            Giddu-galeessa sirrummaa qormaata xumuraman hundumaa.
           </p>
         </div>
 
@@ -134,8 +134,8 @@ export default function AnalyticsDashboard() {
             <Flame className="w-5 h-5 fill-blue-50" />
           </div>
           <div>
-            <span className="text-[10px] font-bold text-slate-400 block uppercase">Active Days</span>
-            <span className="text-sm font-black text-slate-950">{data?.streakDays || 0} days</span>
+            <span className="text-[10px] font-bold text-slate-400 block uppercase">Guyyoota Hojjatame</span>
+            <span className="text-sm font-black text-slate-950">{data?.streakDays || 0} guyyaa</span>
           </div>
         </div>
         <div className="bg-white p-4 rounded-3xl border border-slate-100 flex gap-3 items-center">
@@ -143,17 +143,17 @@ export default function AnalyticsDashboard() {
             <Award className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[10px] font-bold text-slate-400 block uppercase">Mock Exams</span>
-            <span className="text-sm font-black text-slate-950">{data?.totalExams || 0} taken</span>
+            <span className="text-[10px] font-bold text-slate-400 block uppercase">Qormaata Shaakalaa</span>
+            <span className="text-sm font-black text-slate-950">{data?.totalExams || 0} fudhatame</span>
           </div>
         </div>
       </div>
 
       {/* Subject Mastery Progress Bars */}
-      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Mastery by Subject</h3>
+      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Dandeettii Gosa Qormaataan</h3>
       <div className="bg-white rounded-3xl border border-slate-150 p-5 flex flex-col gap-4 mb-6">
         {Object.keys(subjectBreakdown).length === 0 ? (
-          <div className="text-center py-4 text-xs text-slate-400">No subject statistics available.</div>
+          <div className="text-center py-4 text-xs text-slate-400">Gabaasni gosa qormaataa hin jiru.</div>
         ) : (
           Object.entries(subjectBreakdown).map(([subject, stats]) => (
             <div key={subject} className="flex flex-col gap-2">
@@ -168,7 +168,7 @@ export default function AnalyticsDashboard() {
                 />
               </div>
               <div className="text-[10px] text-slate-400 font-medium">
-                {stats.examsTaken} {stats.examsTaken === 1 ? "exam" : "exams"} taken
+                {stats.examsTaken} qormaata fudhatame
               </div>
             </div>
           ))
@@ -176,11 +176,11 @@ export default function AnalyticsDashboard() {
       </div>
 
       {/* Exam History Log */}
-      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Recent Exam History</h3>
+      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Seenaa Qormaata Dhiyoo</h3>
       <div className="flex flex-col gap-3">
         {history.length === 0 ? (
           <div className="text-center py-8 rounded-3xl border border-dashed border-slate-300 text-xs text-slate-400 bg-white">
-            Take your first exam to view history.
+            Seenaa argachuuf dura qormaata fudhadhu.
           </div>
         ) : (
           history.map((item) => (

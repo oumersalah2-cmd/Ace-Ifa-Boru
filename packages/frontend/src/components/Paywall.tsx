@@ -7,16 +7,15 @@ export function Paywall({ onUpgrade }: { onUpgrade: () => void }) {
       <div className="w-16 h-16 rounded-2xl bg-amber-100 flex items-center justify-center text-3xl">
         🔒
       </div>
-      <h2 className="text-lg font-semibold text-slate-900">Premium question</h2>
+      <h2 className="text-lg font-semibold text-slate-900">Gaaffii Premium</h2>
       <p className="text-sm text-slate-500 max-w-xs">
-        This question is part of a full mock exam. Unlock premium to access every
-        subject, unlimited timed exams, and detailed analytics.
+        Gaaffiin kun kutaa qormaata guutuu ti. Gosa qormaataa hunda, yeroo daangaa hin qabnee fi xiinxala bal'aa argachuuf premium saaqi.
       </p>
       <button
         onClick={onUpgrade}
         className="mt-2 w-full max-w-xs rounded-xl bg-blue-600 py-3 text-white font-medium active:scale-[0.98] transition-transform"
       >
-        Unlock Premium
+        Premium Saaqi
       </button>
     </div>
   );

@@ -1,4 +1,9 @@
 // backend/src/index.ts
+// Add support for BigInt serialization to prevent JSON.stringify crashes
+(BigInt.prototype as any).toJSON = function () {
+  return this.toString();
+};
+
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes";

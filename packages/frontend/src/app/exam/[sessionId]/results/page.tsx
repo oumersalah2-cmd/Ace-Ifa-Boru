@@ -80,7 +80,7 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-slate-50">
         <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-        <p className="mt-4 text-sm text-slate-500 font-medium">Calculating results...</p>
+        <p className="mt-4 text-sm text-slate-500 font-medium">Bu'aa qormaataa herregaa jira...</p>
       </div>
     );
   }
@@ -88,9 +88,9 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
   if (!session || !questions) {
     return (
       <div className="flex flex-col items-center justify-center h-screen px-6 text-center bg-slate-50">
-        <p className="text-sm text-slate-500">Failed to load exam results.</p>
+        <p className="text-sm text-slate-500">Bu'aa qormaataa fiduu hin dandeenye.</p>
         <button onClick={goHome} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold">
-          Back to Dashboard
+          Gara Daashboordiitti Deebi'i
         </button>
       </div>
     );
@@ -101,13 +101,13 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
   const percentage = Math.round((score / total) * 100);
 
   // Dynamic review quotes
-  let feedbackQuote = "Keep practicing!";
+  let feedbackQuote = "Shaakaluu kee itti fufi!";
   let feedbackColor = "text-amber-500";
   if (percentage >= 80) {
-    feedbackQuote = "Outstanding work! You've mastered this subject.";
+    feedbackQuote = "Hojii dinqisiisaa! Gosa qormaataa kana irratti dandeettii olaanaa argatteetta.";
     feedbackColor = "text-emerald-600";
   } else if (percentage >= 50) {
-    feedbackQuote = "Good effort! Just a few more reviews to ace it.";
+    feedbackQuote = "Jabaatteetta! Qabxii caalu argachuuf xiqqoo shaakali.";
     feedbackColor = "text-blue-600";
   }
 
@@ -121,22 +121,22 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
-        <span className="text-sm font-semibold text-slate-700">Dashboard</span>
+        <span className="text-sm font-semibold text-slate-700">Daashboordii</span>
       </div>
 
       {/* Main Score Card */}
       <div className="bg-white rounded-3xl border border-slate-150 p-6 flex flex-col items-center text-center shadow-sm mb-6 animate-scale-in">
         <Award className="w-12 h-12 text-blue-600 mb-2" />
-        <h2 className="text-base font-semibold text-slate-400 uppercase tracking-wide">Exam Completed</h2>
+        <h2 className="text-base font-semibold text-slate-400 uppercase tracking-wide">Qormaanni Xumurameera</h2>
         <h1 className="text-4xl font-black text-slate-900 mt-1">{percentage}%</h1>
         <p className="text-sm font-bold text-slate-800 mt-1">
-          {score} / {total} correct answers
+          deebii sirrii {score} / {total}
         </p>
         <p className={`text-xs font-semibold mt-3 ${feedbackColor}`}>{feedbackQuote}</p>
       </div>
 
       {/* Review Section */}
-      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Review Questions</h3>
+      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Gaaffilee Keessa Deebi'i</h3>
       <div className="flex flex-col gap-4 mb-6">
         {questions.map((q, idx) => {
           const userAnswer = session.currentAnswers[q.id];
@@ -162,7 +162,7 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
                     <HelpCircle className="w-5 h-5 text-slate-400 shrink-0 mt-0.5" />
                   )}
                   <div>
-                    <h4 className="text-xs font-bold text-slate-400">Question {idx + 1}</h4>
+                    <h4 className="text-xs font-bold text-slate-400">Gaaffii {idx + 1}</h4>
                     <p className="text-sm font-medium text-slate-900 leading-relaxed mt-1 line-clamp-2">
                       {q.questionText}
                     </p>
@@ -217,7 +217,7 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
                   {/* Explanation */}
                   {q.explanation && (
                     <div className="mt-2 bg-slate-50 border border-slate-100 rounded-xl p-3 text-xs leading-relaxed text-slate-600">
-                      <span className="font-bold text-slate-800 block mb-1">💡 Explanation:</span>
+                      <span className="font-bold text-slate-800 block mb-1">💡 Ibsa:</span>
                       {q.explanation}
                     </div>
                   )}
@@ -233,7 +233,7 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
         onClick={goHome}
         className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-750 text-white font-bold active:scale-[0.98] transition-transform shadow-md shadow-blue-200"
       >
-        Done Reviewing
+        Xumureera
       </button>
     </div>
   );

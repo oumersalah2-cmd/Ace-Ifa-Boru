@@ -17,25 +17,32 @@ interface Subject {
 
 const SUBJECTS: Subject[] = [
   {
-    name: "Afaan Oromoo",
-    description: "Master Oromo grammar, vocabulary, and rich literature.",
-    count: 3,
-    freeCount: 2,
-    color: "from-emerald-500 to-teal-600",
-  },
-  {
-    name: "Mathematics",
-    description: "Sharpen your algebra, geometry, and probability skills.",
-    count: 3,
-    freeCount: 1,
+    name: "Herrega",
+    description: "Dandeettii herregaa, aljebraa, joomootrii fi piroobaabiliitii kee gabbisi.",
+    count: 0,
+    freeCount: 0,
     color: "from-blue-500 to-indigo-600",
   },
   {
-    name: "General Knowledge",
-    description: "Explore geography, science, and history trivia.",
-    count: 3,
-    freeCount: 2,
+    name: "Saayinsii waligalaa",
+    description: "Saayinsii fi beekumsa waliigalaa adda addaa shaakali.",
+    count: 0,
+    freeCount: 0,
     color: "from-purple-500 to-pink-600",
+  },
+  {
+    name: "Afaan Oromoo",
+    description: "Caasluga, jechoota fi barruu afaan Oromoo kee gabbisi.",
+    count: 0,
+    freeCount: 0,
+    color: "from-emerald-500 to-teal-600",
+  },
+  {
+    name: "English",
+    description: "Improve your English grammar, vocabulary, and reading comprehension skills.",
+    count: 0,
+    freeCount: 0,
+    color: "from-amber-500 to-orange-600",
   },
 ];
 
@@ -82,7 +89,6 @@ export default function Dashboard() {
       router.push(`/exam/${session.id}`);
     } catch (err) {
       console.error("Failed to create exam session:", err);
-      // If it's a paywall error, we handle it or let the router catch it
       router.push("/upgrade");
     } finally {
       setStartingSubject(null);
@@ -93,7 +99,7 @@ export default function Dashboard() {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-slate-50">
         <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="mt-4 text-sm text-slate-500 font-medium">Connecting to Telegram...</p>
+        <p className="mt-4 text-sm text-slate-500 font-medium">Telegram waliin wal-qunnamaa jira...</p>
       </div>
     );
   }
@@ -102,7 +108,7 @@ export default function Dashboard() {
     return (
       <div className="flex flex-col items-center justify-center h-screen px-6 text-center bg-slate-50">
         <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-xl font-bold mb-4">!</div>
-        <h3 className="text-base font-semibold text-slate-900">Authentication Error</h3>
+        <h3 className="text-base font-semibold text-slate-900">Dogoggora Eenyummeessuu</h3>
         <p className="mt-2 text-sm text-slate-500 max-w-xs">{authError}</p>
       </div>
     );
@@ -113,7 +119,7 @@ export default function Dashboard() {
       {/* Header Banner */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Welcome back</h2>
+          <h2 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Baga Nagaan Deebite</h2>
           <h1 className="text-xl font-bold text-slate-950 flex items-center gap-1.5 mt-0.5">
             {user?.firstName}
             {isPremium ? (
@@ -122,7 +128,7 @@ export default function Dashboard() {
               </span>
             ) : (
               <span className="bg-slate-200 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                Free Plan
+                Sagantaa Bilisaa
               </span>
             )}
           </h1>
@@ -141,20 +147,20 @@ export default function Dashboard() {
           <Flame className="w-5 h-5 text-amber-500 mb-2" />
           <div>
             <span className="text-[10px] font-medium text-slate-400 block uppercase">Streak</span>
-            <span className="text-base font-bold text-slate-950">{loadingStats ? "-" : stats?.streakDays} days</span>
+            <span className="text-base font-bold text-slate-950">{loadingStats ? "-" : stats?.streakDays} guyyaa</span>
           </div>
         </div>
         <div className="bg-white p-3 rounded-2xl border border-slate-100 flex flex-col justify-between">
           <BookOpen className="w-5 h-5 text-blue-500 mb-2" />
           <div>
-            <span className="text-[10px] font-medium text-slate-400 block uppercase">Exams</span>
-            <span className="text-base font-bold text-slate-950">{loadingStats ? "-" : stats?.totalExams} completed</span>
+            <span className="text-[10px] font-medium text-slate-400 block uppercase">Qormaata</span>
+            <span className="text-base font-bold text-slate-950">{loadingStats ? "-" : stats?.totalExams} xumurame</span>
           </div>
         </div>
         <div className="bg-white p-3 rounded-2xl border border-slate-100 flex flex-col justify-between">
           <Award className="w-5 h-5 text-emerald-500 mb-2" />
           <div>
-            <span className="text-[10px] font-medium text-slate-400 block uppercase">Avg Score</span>
+            <span className="text-[10px] font-medium text-slate-400 block uppercase">Qabxii giddu-galeessaa</span>
             <span className="text-base font-bold text-slate-950">{loadingStats ? "-" : `${stats?.averageScorePct}%`}</span>
           </div>
         </div>
@@ -171,8 +177,8 @@ export default function Dashboard() {
               <Crown className="w-6 h-6 text-amber-950 fill-amber-950" />
             </div>
             <div>
-              <h3 className="text-sm font-bold">Unlock Ace-Ifa-Boru Premium</h3>
-              <p className="text-xs opacity-80 mt-0.5">Access timed exams & detailed analytics</p>
+              <h3 className="text-sm font-bold">Ace-Ifa-Boru Premium Saaqi</h3>
+              <p className="text-xs opacity-80 mt-0.5">Qormaata yeroo fi xiinxala bal'aa argadhu</p>
             </div>
           </div>
           <ChevronRight className="w-5 h-5 opacity-70" />
@@ -180,7 +186,7 @@ export default function Dashboard() {
       )}
 
       {/* Subject Section */}
-      <h3 className="text-sm font-semibold text-slate-800 mb-3">Choose a Subject</h3>
+      <h3 className="text-sm font-semibold text-slate-800 mb-3">Gosa Qormaataa Filadhu</h3>
       <div className="flex flex-col gap-4">
         {SUBJECTS.map((subject) => {
           const isStarting = startingSubject === subject.name;
@@ -198,9 +204,9 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between text-xs text-slate-400 font-medium">
                   <span className="bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full flex items-center gap-1">
                     <BookOpen className="w-3.5 h-3.5" />
-                    {subject.count} Questions total
+                    Barbaadamaa jira...
                   </span>
-                  <span>{subject.freeCount} Free Questions</span>
+                  <span>Bilisa</span>
                 </div>
                 <button
                   onClick={() => startQuiz(subject.name)}
@@ -216,7 +222,7 @@ export default function Dashboard() {
                     <div className="w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <>
-                      <Zap className="w-4 h-4 fill-white" /> Start Practice Exam
+                      <Zap className="w-4 h-4 fill-white" /> Qormaata Jalqabi
                     </>
                   )}
                 </button>
