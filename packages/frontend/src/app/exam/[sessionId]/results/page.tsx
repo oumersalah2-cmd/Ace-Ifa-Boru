@@ -33,11 +33,11 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
   const [loading, setLoading] = useState(true);
   const [expandedQuestion, setExpandedQuestion] = useState<Record<string, boolean>>({});
 
-  const goHome = () => {
-    router.push("/");
+  const goBack = () => {
+    window.location.href = "/";
   };
 
-  useBackButtonControl(goHome, true);
+  useBackButtonControl(goBack, true);
 
   useEffect(() => {
     if (!token) return;
@@ -89,7 +89,7 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
     return (
       <div className="flex flex-col items-center justify-center h-screen px-6 text-center bg-slate-50">
         <p className="text-sm text-slate-500">Bu'aa qormaataa fiduu hin dandeenye.</p>
-        <button onClick={goHome} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold">
+        <button onClick={goBack} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-semibold">
           Gara Daashboordiitti Deebi'i
         </button>
       </div>
@@ -116,7 +116,7 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
       {/* Header */}
       <div className="flex items-center gap-2 mb-6">
         <button
-          onClick={goHome}
+          onClick={goBack}
           className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-700 active:scale-90 transition-transform"
         >
           <ChevronLeft className="w-4 h-4" />
@@ -230,7 +230,7 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
 
       {/* Return to Dashboard */}
       <button
-        onClick={goHome}
+        onClick={goBack}
         className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-750 text-white font-bold active:scale-[0.98] transition-transform shadow-md shadow-blue-200"
       >
         Xumureera

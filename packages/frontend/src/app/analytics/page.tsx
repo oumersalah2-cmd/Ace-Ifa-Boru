@@ -35,7 +35,7 @@ export default function AnalyticsDashboard() {
   const [loading, setLoading] = useState(true);
 
   const goBack = () => {
-    router.push("/");
+    window.location.href = "/";
   };
 
   useBackButtonControl(goBack, true);

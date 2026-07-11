@@ -15,43 +15,16 @@ export default function UpgradeScreen() {
   const [success, setSuccess] = useState(false);
 
   const goBack = () => {
-    router.push("/");
+    window.location.href = "/";
   };
 
   // Telegram native BackButton goes back to dashboard
   useBackButtonControl(goBack, true);
 
   const handleUpgrade = async () => {
-    if (!token || loading) return;
-    setLoading(true);
-    try {
-      const base = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const res = await fetch(`${base}/paywall/upgrade`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!res.ok) throw new Error("Upgrade failed");
-
-      setSuccess(true);
-      await refreshPremiumStatus();
-      
-      // Confetti burst for high satisfaction factor!
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ["#f59e0b", "#fbbf24", "#0c92e9", "#0c426e", "#fff"],
-      });
-    } catch (e) {
-      console.error(e);
-      alert("Kaffaltiin hin milkoofne. Qunnamtii interneetii kee mirkaneessi deebisi yaali.");
-    } finally {
-      setLoading(false);
-    }
+    // We can keep the manual unlock logic for testing or admin use if needed,
+    // but in a real manual payment flow, the user contacts the admin.
+    window.open("https://t.me/Oumersalah", "_blank"); // Example link to admin
   };
 
   const features = [
@@ -124,23 +97,28 @@ export default function UpgradeScreen() {
 
         {/* Price Tag */}
         <div className="mt-5 px-5 py-2.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900 flex items-center gap-1">
-          <span className="text-lg font-black">$4.99</span>
+          <span className="text-lg font-black">200 Birr</span>
           <span className="text-[10px] uppercase font-semibold text-amber-700">/ Kaffaltii yeroo tokkoo qofa</span>
         </div>
       </div>
 
-      {/* Features List */}
-      <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Maaltu Of Keessatti Hammata</h3>
-      <div className="flex flex-col gap-4 mb-6">
-        {features.map((feature, idx) => (
-          <div key={idx} className="flex gap-4 p-4 rounded-2xl bg-white border border-slate-100 items-start">
-            <CheckCircle2 className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-            <div>
-              <h4 className="text-sm font-bold text-slate-900">{feature.title}</h4>
-              <p className="text-xs text-slate-500 leading-relaxed mt-1">{feature.description}</p>
-            </div>
-          </div>
-        ))}
+      {/* Payment Instructions */}
+      <div className="bg-white rounded-2xl border border-slate-150 p-5 mb-6 flex flex-col gap-4">
+        <h3 className="text-sm font-bold text-slate-900">Akkaataa Kaffaltii (Payment Options)</h3>
+        
+        <div className="flex flex-col gap-2 p-3 bg-blue-50 rounded-xl border border-blue-100">
+          <span className="text-xs font-bold text-blue-900">Baankii Daldala Itoophiyaa (CBE)</span>
+          <span className="text-lg font-black text-blue-700 tracking-wide">1000551443489</span>
+        </div>
+
+        <div className="flex flex-col gap-2 p-3 bg-green-50 rounded-xl border border-green-100">
+          <span className="text-xs font-bold text-green-900">Telebirr</span>
+          <span className="text-lg font-black text-green-700 tracking-wide">0934978247</span>
+        </div>
+
+        <p className="text-xs text-slate-500 leading-relaxed mt-2">
+          Erga kaffaltii raawwattanii booda, ragaa (screenshot) kaffaltii keessanii adminii Telegram irraan nuuf ergaa.
+        </p>
       </div>
 
       {/* Trust Badge */}
@@ -148,20 +126,6 @@ export default function UpgradeScreen() {
         <ShieldAlert className="w-3.5 h-3.5" /> Kaffaltii amansiisaa. Yeroo barbaaddanitti haquu dandeessu.
       </div>
 
-      {/* Upgrade Action Button */}
-      <button
-        onClick={handleUpgrade}
-        disabled={loading}
-        className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-750 text-white font-bold active:scale-[0.98] transition-all flex items-center justify-center gap-2 border border-amber-450 shadow-md shadow-amber-100"
-      >
-        {loading ? (
-          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-        ) : (
-          <>
-            <Crown className="w-5 h-5 fill-white" /> Premium Amma Jalqabi
-          </>
-        )}
-      </button>
     </div>
   );
 }
