@@ -10,6 +10,7 @@ import { BookOpen, Award, Flame, Crown, ChevronRight, BarChart2, Zap, X, Message
 interface Subject {
   name: string;
   description: string;
+  emoji: string;
   count: number;
   freeCount: number;
   color: string;
@@ -18,28 +19,32 @@ interface Subject {
 const SUBJECTS: Subject[] = [
   {
     name: "Herrega",
-    description: "Dandeettii herregaa, aljebraa, joomootrii fi piroobaabiliitii kee gabbisi.",
+    emoji: "🔢",
+    description: "Qormolee baroota darban Ifa Boruu — herregaan akka ibsaa si wajjiin!",
     count: 0,
     freeCount: 0,
     color: "from-blue-500 to-indigo-600",
   },
   {
-    name: "Saayinsii waligalaa",
-    description: "Saayinsii fi beekumsa waliigalaa adda addaa shaakali.",
+    name: "Saayinsii",
+    emoji: "🔬",
+    description: "Qormolee baroota darban Ifa Boruu — beekumsi saayinsii akka ibsaa si wajjiin!",
     count: 0,
     freeCount: 0,
     color: "from-purple-500 to-pink-600",
   },
   {
     name: "Afaan Oromoo",
-    description: "Caasluga, jechoota fi barruu afaan Oromoo kee gabbisi.",
+    emoji: "✍️",
+    description: "Qormolee baroota darban Ifa Boruu — afaan keetti akka ibsaa si wajjiin!",
     count: 0,
     freeCount: 0,
     color: "from-emerald-500 to-teal-600",
   },
   {
     name: "English",
-    description: "Improve your English grammar, vocabulary, and reading comprehension skills.",
+    emoji: "📖",
+    description: "Qormolee baroota darban Ifa Boruu — English akka ibsaa si wajjiin!",
     count: 0,
     freeCount: 0,
     color: "from-amber-500 to-orange-600",
@@ -272,10 +277,14 @@ export default function Dashboard() {
           return (
             <div
               key={subject.name}
-              className="bg-white rounded-3xl border border-slate-150 overflow-hidden shadow-sm flex flex-col"
+              className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm flex flex-col"
             >
-              <div className={`h-2 bg-gradient-to-r ${subject.color}`} />
-              <div className="p-4 flex flex-col flex-1 gap-2">
+              {/* Gradient header with emoji doodle */}
+              <div className={`bg-gradient-to-r ${subject.color} flex items-center justify-between px-3 py-2`}>
+                <span className="text-xl leading-none">{subject.emoji}</span>
+                <span className="text-[9px] font-bold text-white/80 uppercase tracking-widest">Ifa Boruu ✨</span>
+              </div>
+              <div className="p-3 flex flex-col flex-1 gap-2">
                 <div className="flex-1">
                   <h4 className="text-sm font-bold text-slate-950 leading-tight">{subject.name}</h4>
                   <p className="text-[10px] text-slate-500 mt-1 leading-relaxed line-clamp-3">{subject.description}</p>
@@ -286,7 +295,7 @@ export default function Dashboard() {
                       <BookOpen className="w-3 h-3" />
                       Gaaffilee
                     </span>
-                    <span>Bilisa</span>
+                    <span className="text-emerald-600 font-bold">Bilisa</span>
                   </div>
                   <button
                     onClick={() => startQuiz(subject.name)}
@@ -294,7 +303,7 @@ export default function Dashboard() {
                     className={`w-full py-2.5 rounded-xl font-semibold text-xs transition-all active:scale-[0.98] mt-1 flex items-center justify-center gap-1.5
                       ${isStarting
                         ? "bg-slate-100 text-slate-400"
-                        : "bg-blue-600 text-white hover:bg-blue-700 shadow-sm shadow-blue-200"
+                        : `bg-gradient-to-r ${subject.color} text-white shadow-sm`
                       }`}
                   >
                     {isStarting ? (
