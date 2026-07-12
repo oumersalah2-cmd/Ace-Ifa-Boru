@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "./providers";
 import { api } from "@/lib/api";
-import { BookOpen, Award, Flame, Crown, ChevronRight, BarChart2, Zap, X, MessageCircle } from "lucide-react";
+import { BookOpen, Award, Flame, Crown, ChevronRight, BarChart2, Zap, X, MessageCircle, Lock, Unlock, LogOut } from "lucide-react";
 
 interface Subject {
   name: string;
@@ -214,18 +214,21 @@ export default function Dashboard() {
                 </button>
               )}
 
-              {/* Log Out option for custom credential-based logins */}
-              {typeof window !== "undefined" && sessionStorage.getItem("credential_token") && (
-                <button
-                  onClick={() => {
+              {/* Sign Out — always visible */}
+              <button
+                onClick={() => {
+                  setShowProfile(false);
+                  if (typeof window !== "undefined" && sessionStorage.getItem("credential_token")) {
                     logout();
-                    setShowProfile(false);
-                  }}
-                  className="w-full py-3 rounded-2xl border border-red-200 text-red-650 font-medium text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all hover:bg-red-50"
-                >
-                  Sign Out (Bahi)
-                </button>
-              )}
+                  } else if (typeof window !== "undefined" && (window as any).Telegram?.WebApp) {
+                    (window as any).Telegram.WebApp.close();
+                  }
+                }}
+                className="w-full py-3 rounded-2xl border border-red-100 bg-red-50 text-red-600 font-semibold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
+              >
+                <LogOut className="w-4 h-4" />
+                Bahi (Sign Out)
+              </button>
             </div>
           </div>
         </div>
@@ -304,7 +307,18 @@ export default function Dashboard() {
               {/* Gradient header with emoji doodle */}
               <div className={`bg-gradient-to-r ${subject.color} flex items-center justify-between px-3 py-2`}>
                 <span className="text-xl leading-none">{subject.emoji}</span>
-                <span className="text-[9px] font-bold text-white/80 uppercase tracking-widest">Ifa Boruu ✨</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[9px] font-bold text-white/80 uppercase tracking-widest">Ifa Boruu ✨</span>
+                  {isPremium ? (
+                    <span className="bg-white/20 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                      <Unlock className="w-2.5 h-2.5" /> Banaa
+                    </span>
+                  ) : (
+                    <span className="bg-black/20 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                      <Lock className="w-2.5 h-2.5" /> 5 Bilisaa
+                    </span>
+                  )}
+                </div>
               </div>
               <div className="p-3 flex flex-col flex-1 gap-2">
                 <div className="flex-1">
@@ -315,9 +329,11 @@ export default function Dashboard() {
                   <div className="flex items-center justify-between text-[10px] text-slate-400 font-medium">
                     <span className="bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full flex items-center gap-1">
                       <BookOpen className="w-3 h-3" />
-                      Gaaffilee
+                      {isPremium ? "Gaaffilee Hunda" : "5 Gaaffilee"}
                     </span>
-                    <span className="text-emerald-600 font-bold">Bilisa</span>
+                    <span className={isPremium ? "text-amber-600 font-bold flex items-center gap-0.5" : "text-emerald-600 font-bold"}>
+                      {isPremium ? <><Crown className="w-3 h-3 fill-amber-600" /> Premium</> : "Bilisaa"}
+                    </span>
                   </div>
                   <button
                     onClick={() => startQuiz(subject.name)}
