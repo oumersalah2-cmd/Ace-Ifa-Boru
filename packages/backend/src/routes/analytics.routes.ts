@@ -10,15 +10,17 @@ router.use(requireAuth);
 
 /**
  * GET /analytics/overview
- * Fetches user analytics overview: completed count, average score, subject stats, and recent activity.
+ * Fetches user analytics overview.
  */
 router.get("/analytics/overview", async (req: AuthedRequest, res: Response) => {
   try {
-    const userId = req.telegramId!;
+    const whereClause = req.credentialUserId
+      ? { credentialUserId: req.credentialUserId, isCompleted: true }
+      : { userId: req.telegramId!, isCompleted: true };
 
     // Fetch all completed exam sessions for user
     const sessions = await prisma.examSession.findMany({
-      where: { userId, isCompleted: true },
+      where: whereClause,
       orderBy: { completedAt: "desc" },
     });
 
@@ -93,15 +95,13 @@ router.get("/analytics/overview", async (req: AuthedRequest, res: Response) => {
  */
 router.get("/analytics/subject/:subject", async (req: AuthedRequest, res: Response) => {
   try {
-    const userId = req.telegramId!;
     const { subject } = req.params;
+    const whereClause = req.credentialUserId
+      ? { credentialUserId: req.credentialUserId, subject, isCompleted: true }
+      : { userId: req.telegramId!, subject, isCompleted: true };
 
     const sessions = await prisma.examSession.findMany({
-      where: {
-        userId,
-        subject,
-        isCompleted: true,
-      },
+      where: whereClause,
       orderBy: { completedAt: "desc" },
     });
 

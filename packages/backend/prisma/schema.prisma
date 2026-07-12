@@ -32,6 +32,23 @@ model User {
   @@map("users")
 }
 
+model CredentialUser {
+  id            String    @id @default(uuid()) @db.Uuid
+  username      String    @unique
+  passwordHash  String    @map("password_hash")
+  fullName      String?   @map("full_name")
+  isPremium     Boolean   @default(false) @map("is_premium")
+  premiumUntil  DateTime? @map("premium_until")
+  telegramChatId BigInt?  @map("telegram_chat_id")
+
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  examSessions  ExamSession[]
+
+  @@map("credential_users")
+}
+
 model Question {
   id                  String   @id @default(uuid()) @db.Uuid
   subject             String
@@ -51,8 +68,11 @@ model Question {
 
 model ExamSession {
   id              String    @id @default(uuid()) @db.Uuid
-  userId          BigInt    @map("user_id")
-  user            User      @relation(fields: [userId], references: [telegramId])
+  userId          BigInt?   @map("user_id")
+  user            User?     @relation(fields: [userId], references: [telegramId])
+
+  credentialUserId String?  @db.Uuid @map("credential_user_id")
+  credentialUser   CredentialUser? @relation(fields: [credentialUserId], references: [id])
 
   subject         String?
   questionIds     Json      @map("question_ids")     // ordered array of question UUIDs in this session
@@ -66,5 +86,6 @@ model ExamSession {
   expiresAt       DateTime? @map("expires_at") // for timed exams
 
   @@index([userId, isCompleted])
+  @@index([credentialUserId, isCompleted])
   @@map("exam_sessions")
 }

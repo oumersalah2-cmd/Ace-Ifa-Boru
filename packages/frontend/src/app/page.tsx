@@ -68,7 +68,7 @@ function getInitials(name: string) {
 
 export default function Dashboard() {
   const router = useRouter();
-  const { token, user, isPremium, loading: authLoading, error: authError } = useAuth();
+  const { token, user, isPremium, loading: authLoading, error: authError, logout } = useAuth();
   const [stats, setStats] = useState<OverviewStats | null>(null);
   const [loadingStats, setLoadingStats] = useState(true);
   const [startingSubject, setStartingSubject] = useState<string | null>(null);
@@ -202,6 +202,19 @@ export default function Dashboard() {
                 >
                   <Crown className="w-4 h-4 fill-amber-950" />
                   Premium Saaqi
+                </button>
+              )}
+
+              {/* Log Out option for custom credential-based logins */}
+              {typeof window !== "undefined" && sessionStorage.getItem("credential_token") && (
+                <button
+                  onClick={() => {
+                    logout();
+                    setShowProfile(false);
+                  }}
+                  className="w-full py-3 rounded-2xl border border-red-200 text-red-650 font-medium text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all hover:bg-red-50"
+                >
+                  Sign Out (Bahi)
                 </button>
               )}
             </div>

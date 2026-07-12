@@ -14,6 +14,23 @@ router.use(requireAuth);
  */
 router.get("/paywall/check", async (req: AuthedRequest, res: Response) => {
   try {
+    if (req.credentialUserId) {
+      const user = await prisma.credentialUser.findUnique({
+        where: { id: req.credentialUserId },
+      });
+
+      if (!user) {
+        return res.status(404).json({ error: "user_not_found" });
+      }
+
+      const isPremium = user.isPremium && (!user.premiumUntil || user.premiumUntil.getTime() > Date.now());
+
+      return res.json({
+        isPremium,
+        premiumUntil: user.premiumUntil,
+      });
+    }
+
     const user = await prisma.user.findUnique({
       where: { telegramId: req.telegramId! },
     });
@@ -42,6 +59,26 @@ router.post("/paywall/upgrade", async (req: AuthedRequest, res: Response) => {
   try {
     const thirtyDaysFromNow = new Date();
     thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+
+    if (req.credentialUserId) {
+      const updatedUser = await prisma.credentialUser.update({
+        where: { id: req.credentialUserId },
+        data: {
+          isPremium: true,
+          premiumUntil: thirtyDaysFromNow,
+        },
+      });
+
+      return res.json({
+        success: true,
+        message: "Premium access granted for 30 days!",
+        user: {
+          id: updatedUser.id,
+          isPremium: updatedUser.isPremium,
+          premiumUntil: updatedUser.premiumUntil,
+        },
+      });
+    }
 
     const updatedUser = await prisma.user.update({
       where: { telegramId: req.telegramId! },

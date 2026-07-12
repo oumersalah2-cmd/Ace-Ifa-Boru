@@ -55,4 +55,20 @@ export const api = {
 
   getQuestion: (token: string, questionId: string) =>
     authedFetch(token, `/questions/${questionId}`),
+
+  credentialLogin: (username: string, password: string) =>
+    fetch(`${API_BASE}/auth/credential/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    }).then(async (res) => {
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || "Username ykn password dogoggora.");
+      }
+      return res.json() as Promise<{
+        token: string;
+        user: { id: string; username: string; firstName: string; isPremium: boolean; premiumUntil: string | null };
+      }>;
+    }),
 };

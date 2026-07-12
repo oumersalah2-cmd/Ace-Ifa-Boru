@@ -7,6 +7,7 @@
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes";
+import credentialAuthRoutes from "./routes/credential-auth.routes";
 import examRoutes from "./routes/exam.routes";
 import paywallRoutes from "./routes/paywall.routes";
 import analyticsRoutes from "./routes/analytics.routes";
@@ -28,6 +29,7 @@ app.use(
 
 // Register routes
 app.use(authRoutes);
+app.use(credentialAuthRoutes);
 app.use(examRoutes);
 app.use(paywallRoutes);
 app.use(analyticsRoutes);

@@ -19,19 +19,32 @@ function isCurrentlyPremium(user: { isPremium: boolean; premiumUntil: Date | nul
   return true;
 }
 
+async function getAuthedUser(req: AuthedRequest) {
+  if (req.credentialUserId) {
+    return await prisma.credentialUser.findUnique({ where: { id: req.credentialUserId } });
+  }
+  if (req.telegramId) {
+    return await prisma.user.findUnique({ where: { telegramId: req.telegramId } });
+  }
+  return null;
+}
+
+function isSessionOwner(session: { userId: bigint | null; credentialUserId: string | null }, req: AuthedRequest) {
+  if (req.credentialUserId && session.credentialUserId === req.credentialUserId) return true;
+  if (req.telegramId && session.userId === req.telegramId) return true;
+  return false;
+}
+
 /**
  * GET /questions/:id
- * Blocks access to premium questions server-side. Frontend never receives
- * the question_text/options/correct_option_index for locked content — it
- * gets a paywall marker instead, so answers/explanations can't be scraped
- * from the network tab.
+ * Blocks access to premium questions server-side.
  */
 router.get("/questions/:id", async (req: AuthedRequest, res: Response) => {
   const question = await prisma.question.findUnique({ where: { id: req.params.id } });
   if (!question) return res.status(404).json({ error: "not_found" });
 
   if (!question.isFree) {
-    const user = await prisma.user.findUnique({ where: { telegramId: req.telegramId! } });
+    const user = await getAuthedUser(req);
     if (!user || !isCurrentlyPremium(user)) {
       return res.status(402).json({
         error: "paywall",
@@ -45,24 +58,20 @@ router.get("/questions/:id", async (req: AuthedRequest, res: Response) => {
 
 /**
  * POST /exam-sessions
- * Body: { subject, questionIds: string[] }
- * Creates a session. If any requested question is premium and the user
- * isn't, those ids are silently dropped from the session (fail closed).
  */
 router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
   const { subject, questionIds } = req.body as { subject?: string; questionIds?: string[] };
 
-  const user = await prisma.user.findUnique({ where: { telegramId: req.telegramId! } });
+  const user = await getAuthedUser(req);
   const premium = user ? isCurrentlyPremium(user) : false;
 
   let questions;
   if (questionIds && questionIds.length > 0) {
     questions = await prisma.question.findMany({ where: { id: { in: questionIds } } });
   } else {
-    // If no specific question IDs are requested, load questions for the given subject
     questions = await prisma.question.findMany({
       where: subject ? { subject } : {},
-      take: 10 // Take up to 10 questions for a standard session
+      take: 10
     });
   }
 
@@ -76,7 +85,8 @@ router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
 
   const session = await prisma.examSession.create({
     data: {
-      userId: req.telegramId!,
+      userId: req.telegramId || null,
+      credentialUserId: req.credentialUserId || null,
       subject,
       questionIds: allowedIds,
       currentAnswers: {},
@@ -89,14 +99,13 @@ router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
 
 /**
  * GET /exam-sessions/:id
- * Fetches details of a specific exam session.
  */
 router.get("/exam-sessions/:id", async (req: AuthedRequest, res: Response) => {
   const session = await prisma.examSession.findUnique({
     where: { id: req.params.id },
   });
 
-  if (!session || session.userId !== req.telegramId) {
+  if (!session || !isSessionOwner(session, req)) {
     return res.status(404).json({ error: "not_found" });
   }
 
@@ -105,14 +114,12 @@ router.get("/exam-sessions/:id", async (req: AuthedRequest, res: Response) => {
 
 /**
  * PATCH /exam-sessions/:id/answer
- * Body: { questionId: string, selectedIndex: number }
- * Autosave: called on every answer tap so an app kill mid-exam loses nothing.
  */
 router.patch("/exam-sessions/:id/answer", async (req: AuthedRequest, res: Response) => {
   const { questionId, selectedIndex } = req.body as { questionId: string; selectedIndex: number };
 
   const session = await prisma.examSession.findUnique({ where: { id: req.params.id } });
-  if (!session || session.userId !== req.telegramId) {
+  if (!session || !isSessionOwner(session, req)) {
     return res.status(404).json({ error: "not_found" });
   }
   if (session.isCompleted) {
@@ -132,11 +139,10 @@ router.patch("/exam-sessions/:id/answer", async (req: AuthedRequest, res: Respon
 
 /**
  * POST /exam-sessions/:id/submit
- * Scores the session server-side (never trust a client-computed score).
  */
 router.post("/exam-sessions/:id/submit", async (req: AuthedRequest, res: Response) => {
   const session = await prisma.examSession.findUnique({ where: { id: req.params.id } });
-  if (!session || session.userId !== req.telegramId) {
+  if (!session || !isSessionOwner(session, req)) {
     return res.status(404).json({ error: "not_found" });
   }
 

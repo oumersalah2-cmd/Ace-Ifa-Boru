@@ -4,6 +4,7 @@
 import React, { useEffect, useState, createContext, useContext, ReactNode, Component, ErrorInfo } from "react";
 import { SDKProvider, useLaunchParams } from "@telegram-apps/sdk-react";
 import { exchangeInitDataForToken } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 interface AuthState {
   token: string | null;
@@ -12,6 +13,8 @@ interface AuthState {
   error: string | null;
   user: { telegramId: string; username: string; firstName: string } | null;
   refreshPremiumStatus: () => Promise<void>;
+  loginWithCredentials: (token: string, user: any) => void;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthState>({
@@ -21,6 +24,8 @@ const AuthContext = createContext<AuthState>({
   error: null,
   user: null,
   refreshPremiumStatus: async () => {},
+  loginWithCredentials: () => {},
+  logout: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -94,22 +99,13 @@ function SplashScreen() {
           }} />
         ))}
       </div>
-
-      <style>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-        @keyframes bounce {
-          0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-          40% { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 }
 
 function AuthBridge({ children }: { children: ReactNode }) {
   const launchParams = useLaunchParams();
+  const router = useRouter();
   const [state, setState] = useState<{
     token: string | null;
     isPremium: boolean;
@@ -150,6 +146,30 @@ function AuthBridge({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    // Check for credential login first
+    const credToken = sessionStorage.getItem("credential_token");
+    const credUserStr = sessionStorage.getItem("credential_user");
+
+    if (credToken && credUserStr) {
+      try {
+        const credUser = JSON.parse(credUserStr);
+        setState({
+          token: credToken,
+          isPremium: credUser.isPremium,
+          loading: false,
+          error: null,
+          user: {
+            telegramId: "",
+            username: credUser.username,
+            firstName: credUser.firstName || credUser.username,
+          },
+        });
+        return;
+      } catch (e) {
+        console.error("Failed to parse stored credential user", e);
+      }
+    }
+
     const rawInitData = launchParams?.initDataRaw;
     if (!rawInitData) {
       loadAuth("mock_development_mode");
@@ -168,24 +188,64 @@ function AuthBridge({ children }: { children: ReactNode }) {
       if (res.ok) {
         const data = await res.json();
         setState((prev) => ({ ...prev, isPremium: data.isPremium }));
+
+        // Sync with session storage if credential login
+        if (sessionStorage.getItem("credential_token")) {
+          const credUserStr = sessionStorage.getItem("credential_user");
+          if (credUserStr) {
+            const credUser = JSON.parse(credUserStr);
+            credUser.isPremium = data.isPremium;
+            sessionStorage.setItem("credential_user", JSON.stringify(credUser));
+          }
+        }
       }
     } catch (e) {
       console.error("Failed to refresh premium status", e);
     }
   };
 
+  const loginWithCredentials = (token: string, user: any) => {
+    sessionStorage.setItem("credential_token", token);
+    sessionStorage.setItem("credential_user", JSON.stringify(user));
+    setState({
+      token,
+      isPremium: user.isPremium,
+      loading: false,
+      error: null,
+      user: {
+        telegramId: "",
+        username: user.username,
+        firstName: user.firstName || user.username,
+      },
+    });
+  };
+
+  const logout = () => {
+    sessionStorage.removeItem("credential_token");
+    sessionStorage.removeItem("credential_user");
+    setState({
+      token: null,
+      isPremium: false,
+      loading: false,
+      error: null,
+      user: null,
+    });
+    router.push("/login");
+  };
+
   // Show splash while loading
   if (state.loading) return <SplashScreen />;
 
   return (
-    <AuthContext.Provider value={{ ...state, refreshPremiumStatus }}>
+    <AuthContext.Provider value={{ ...state, refreshPremiumStatus, loginWithCredentials, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-// Fallback Provider that runs when not in Telegram and SDK throws an exception
+// Fallback Provider that runs when not in Telegram
 function MockAuthProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
   const [state, setState] = useState<{
     token: string | null;
     isPremium: boolean;
@@ -201,6 +261,30 @@ function MockAuthProvider({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
+    // Check for credential login first
+    const credToken = sessionStorage.getItem("credential_token");
+    const credUserStr = sessionStorage.getItem("credential_user");
+
+    if (credToken && credUserStr) {
+      try {
+        const credUser = JSON.parse(credUserStr);
+        setState({
+          token: credToken,
+          isPremium: credUser.isPremium,
+          loading: false,
+          error: null,
+          user: {
+            telegramId: "",
+            username: credUser.username,
+            firstName: credUser.firstName || credUser.username,
+          },
+        });
+        return;
+      } catch (e) {
+        console.error("Failed to parse stored credential user", e);
+      }
+    }
+
     exchangeInitDataForToken("mock_development_mode")
       .then(({ token, user }) => {
         setState({
@@ -236,16 +320,55 @@ function MockAuthProvider({ children }: { children: ReactNode }) {
       if (res.ok) {
         const data = await res.json();
         setState((prev) => ({ ...prev, isPremium: data.isPremium }));
+
+        // Sync with session storage if credential login
+        if (sessionStorage.getItem("credential_token")) {
+          const credUserStr = sessionStorage.getItem("credential_user");
+          if (credUserStr) {
+            const credUser = JSON.parse(credUserStr);
+            credUser.isPremium = data.isPremium;
+            sessionStorage.setItem("credential_user", JSON.stringify(credUser));
+          }
+        }
       }
     } catch (e) {
       console.error("Failed to refresh premium status", e);
     }
   };
 
+  const loginWithCredentials = (token: string, user: any) => {
+    sessionStorage.setItem("credential_token", token);
+    sessionStorage.setItem("credential_user", JSON.stringify(user));
+    setState({
+      token,
+      isPremium: user.isPremium,
+      loading: false,
+      error: null,
+      user: {
+        telegramId: "",
+        username: user.username,
+        firstName: user.firstName || user.username,
+      },
+    });
+  };
+
+  const logout = () => {
+    sessionStorage.removeItem("credential_token");
+    sessionStorage.removeItem("credential_user");
+    setState({
+      token: null,
+      isPremium: false,
+      loading: false,
+      error: null,
+      user: null,
+    });
+    router.push("/login");
+  };
+
   if (state.loading) return <SplashScreen />;
 
   return (
-    <AuthContext.Provider value={{ ...state, refreshPremiumStatus }}>
+    <AuthContext.Provider value={{ ...state, refreshPremiumStatus, loginWithCredentials, logout }}>
       {children}
     </AuthContext.Provider>
   );
