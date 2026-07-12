@@ -123,9 +123,21 @@ function AuthBridge({ children }: { children: ReactNode }) {
   const loadAuth = async (initData: string) => {
     try {
       const { token, user } = await exchangeInitDataForToken(initData);
+      // Always re-fetch live premium status from DB after auth
+      let isPremium = user.isPremium;
+      try {
+        const base = process.env.NEXT_PUBLIC_API_BASE_URL;
+        const chk = await fetch(`${base}/paywall/check`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (chk.ok) {
+          const chkData = await chk.json();
+          isPremium = chkData.isPremium;
+        }
+      } catch (_) {}
       setState({
         token,
-        isPremium: user.isPremium,
+        isPremium,
         loading: false,
         error: null,
         user: {
@@ -153,6 +165,7 @@ function AuthBridge({ children }: { children: ReactNode }) {
     if (credToken && credUserStr) {
       try {
         const credUser = JSON.parse(credUserStr);
+        // Restore from cache first (shows UI immediately)
         setState({
           token: credToken,
           isPremium: credUser.isPremium,
@@ -164,6 +177,17 @@ function AuthBridge({ children }: { children: ReactNode }) {
             firstName: credUser.firstName || credUser.username,
           },
         });
+        // Then immediately re-fetch live premium status from DB
+        const base = process.env.NEXT_PUBLIC_API_BASE_URL;
+        fetch(`${base}/paywall/check`, {
+          headers: { Authorization: `Bearer ${credToken}` },
+        }).then(r => r.ok ? r.json() : null).then(data => {
+          if (data) {
+            setState(prev => ({ ...prev, isPremium: data.isPremium }));
+            credUser.isPremium = data.isPremium;
+            sessionStorage.setItem("credential_user", JSON.stringify(credUser));
+          }
+        }).catch(() => {});
         return;
       } catch (e) {
         console.error("Failed to parse stored credential user", e);
@@ -279,6 +303,17 @@ function MockAuthProvider({ children }: { children: ReactNode }) {
             firstName: credUser.firstName || credUser.username,
           },
         });
+        // Re-fetch live premium status from DB
+        const base = process.env.NEXT_PUBLIC_API_BASE_URL;
+        fetch(`${base}/paywall/check`, {
+          headers: { Authorization: `Bearer ${credToken}` },
+        }).then(r => r.ok ? r.json() : null).then(data => {
+          if (data) {
+            setState(prev => ({ ...prev, isPremium: data.isPremium }));
+            credUser.isPremium = data.isPremium;
+            sessionStorage.setItem("credential_user", JSON.stringify(credUser));
+          }
+        }).catch(() => {});
         return;
       } catch (e) {
         console.error("Failed to parse stored credential user", e);
