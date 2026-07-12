@@ -88,6 +88,15 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
     router.push("/");
   }, [router]);
 
+  const goBack = useCallback(() => {
+    if (index > 0) {
+      setIndex((i) => i - 1);
+      setFeedback("idle");
+    } else {
+      setModeConfirmed(false);
+    }
+  }, [index]);
+
   useMainButtonControl({
     text: isLast ? "Qormaata Xumuri" : "Gaaffii Itti Aanu",
     onClick: goNext,
@@ -95,7 +104,7 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
     visible: modeConfirmed && !paywalled,
   });
 
-  useBackButtonControl(goBackCategory, !paywalled);
+  useBackButtonControl(modeConfirmed ? goBack : goBackCategory, !paywalled);
 
   const progressPct = useMemo(
     () => Math.round(((index + 1) / questions.length) * 100),
@@ -192,7 +201,7 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
       <div className="flex items-center justify-between mb-3 text-xs text-slate-500">
         <div className="flex items-center gap-2">
           <button
-            onClick={goBackCategory}
+            onClick={goBack}
             className="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-700 active:scale-90 transition-transform"
           >
             <ChevronLeft className="w-4 h-4" />
