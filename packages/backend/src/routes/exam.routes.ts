@@ -71,7 +71,7 @@ router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
   } else {
     questions = await prisma.question.findMany({
       where: subject ? { subject } : {},
-      take: 10
+      take: 5
     });
   }
 
@@ -90,7 +90,7 @@ router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
       subject,
       questionIds: allowedIds,
       currentAnswers: {},
-      expiresAt: new Date(Date.now() + 60 * 60 * 1000), // 1hr exam window
+      expiresAt: new Date(Date.now() + 10 * 60 * 1000), // 10 min exam window
     },
   });
 
