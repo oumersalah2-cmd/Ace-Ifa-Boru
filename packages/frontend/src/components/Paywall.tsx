@@ -15,7 +15,7 @@ export function Paywall({ onUpgrade }: { onUpgrade: () => void }) {
         onClick={onUpgrade}
         className="mt-2 w-full max-w-xs rounded-xl bg-blue-600 py-3 text-white font-medium active:scale-[0.98] transition-transform"
       >
-        Premium Saaqi
+        Gaaffilee guutummaatti fayyadamuuf
       </button>
     </div>
   );

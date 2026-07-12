@@ -168,21 +168,21 @@ export default function Dashboard() {
 
       {/* Upgrade Callout */}
       {!isPremium && (
-        <div 
+        <button 
           onClick={() => router.push("/upgrade")}
-          className="premium-gradient p-4 rounded-2xl mb-6 flex items-center justify-between text-amber-950 cursor-pointer hover:opacity-95 active:scale-[0.99] transition-all border border-amber-300 shadow-sm"
+          className="w-full text-left premium-gradient p-4 rounded-2xl mb-6 flex items-center justify-between text-amber-950 cursor-pointer hover:opacity-95 active:scale-[0.99] transition-all border border-amber-300 shadow-sm"
         >
           <div className="flex gap-3 items-center">
             <div className="w-10 h-10 rounded-xl bg-amber-900/10 flex items-center justify-center">
               <Crown className="w-6 h-6 text-amber-950 fill-amber-950" />
             </div>
             <div>
-              <h3 className="text-sm font-bold">Ace-Ifa-Boru Premium Saaqi</h3>
+              <h3 className="text-sm font-bold">Gaaffilee ykn mini appicha guutummaatti fayyadamuuf</h3>
               <p className="text-xs opacity-80 mt-0.5">Qormaata yeroo fi xiinxala bal'aa argadhu</p>
             </div>
           </div>
           <ChevronRight className="w-5 h-5 opacity-70" />
-        </div>
+        </button>
       )}
 
       {/* Subject Section */}

@@ -119,6 +119,14 @@ export default function UpgradeScreen() {
         <p className="text-xs text-slate-500 leading-relaxed mt-2">
           Erga kaffaltii raawwattanii booda, ragaa (screenshot) kaffaltii keessanii adminii Telegram irraan nuuf ergaa.
         </p>
+
+        <button
+          onClick={handleUpgrade}
+          className="mt-4 w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold active:scale-[0.98] transition-all shadow-md shadow-blue-200 flex items-center justify-center gap-2"
+        >
+          <Sparkles className="w-4 h-4" />
+          Adminii Quunnami (Contact Admin)
+        </button>
       </div>
 
       {/* Trust Badge */}
