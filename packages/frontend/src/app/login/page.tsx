@@ -1,7 +1,6 @@
-// src/app/login/page.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../providers";
 import { api } from "@/lib/api";
@@ -9,11 +8,17 @@ import { Lock, User, AlertCircle, ArrowRight } from "lucide-react";
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { loginWithCredentials } = useAuth();
+  const { token, loginWithCredentials } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (token) {
+      router.push("/");
+    }
+  }, [token, router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

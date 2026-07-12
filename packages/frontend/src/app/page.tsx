@@ -75,6 +75,15 @@ export default function Dashboard() {
   const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
+    if (!authLoading && !token) {
+      const isTg = typeof window !== "undefined" && (window as any).Telegram?.WebApp?.initData;
+      if (!isTg) {
+        router.push("/login");
+      }
+    }
+  }, [authLoading, token, router]);
+
+  useEffect(() => {
     if (!token) return;
     const base = process.env.NEXT_PUBLIC_API_BASE_URL;
     fetch(`${base}/analytics/overview`, {
