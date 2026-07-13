@@ -123,21 +123,9 @@ function AuthBridge({ children }: { children: ReactNode }) {
   const loadAuth = async (initData: string) => {
     try {
       const { token, user } = await exchangeInitDataForToken(initData);
-      // Always re-fetch live premium status from DB after auth
-      let isPremium = user.isPremium;
-      try {
-        const base = process.env.NEXT_PUBLIC_API_BASE_URL;
-        const chk = await fetch(`${base}/paywall/check`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (chk.ok) {
-          const chkData = await chk.json();
-          isPremium = chkData.isPremium;
-        }
-      } catch (_) {}
       setState({
         token,
-        isPremium,
+        isPremium: user.isPremium,
         loading: false,
         error: null,
         user: {
