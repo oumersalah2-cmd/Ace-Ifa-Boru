@@ -3,6 +3,7 @@
 import { Router, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { requireAuth, AuthedRequest } from "../middleware/requireAuth";
+import { bot } from "../bot";
 
 const prisma = new PrismaClient();
 const router = Router();
@@ -164,6 +165,37 @@ router.post("/exam-sessions/:id/submit", async (req: AuthedRequest, res: Respons
   });
 
   return res.json(updated);
+});
+
+/**
+ * POST /questions/:id/report
+ */
+router.post("/questions/:id/report", async (req: AuthedRequest, res: Response) => {
+  const { reason } = req.body as { reason?: string };
+  const question = await prisma.question.findUnique({ where: { id: req.params.id } });
+  if (!question) return res.status(404).json({ error: "not_found" });
+
+  const user = await getAuthedUser(req);
+  const reporterName = user ? ((user as any).fullName || (user as any).firstName) : "Student";
+  const reporterUsername = user?.username ? `@${user.username}` : "Anonymous";
+
+  if (bot && process.env.ADMIN_TELEGRAM_ID) {
+    try {
+      const message = `⚠️ *GAFFFII GABAASAME (Question Reported)*\n\n` +
+        `👤 *User*: ${reporterName} (${reporterUsername})\n` +
+        `📚 *Subject*: ${question.subject}\n` +
+        `🎯 *Topic*: ${question.topic}\n\n` +
+        `❓ *Question*: "${question.questionText}"\n` +
+        `💡 *Reason*: ${reason || "No reason specified"}\n\n` +
+        `_Please review this question for any mistakes._`;
+      
+      await bot.api.sendMessage(Number(process.env.ADMIN_TELEGRAM_ID), message, { parse_mode: "Markdown" });
+    } catch (err) {
+      console.error("Failed to notify admin of report:", err);
+    }
+  }
+
+  return res.json({ success: true });
 });
 
 export default router;

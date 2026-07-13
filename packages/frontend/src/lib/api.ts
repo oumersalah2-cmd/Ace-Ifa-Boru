@@ -56,6 +56,12 @@ export const api = {
   getQuestion: (token: string, questionId: string) =>
     authedFetch(token, `/questions/${questionId}`),
 
+  reportQuestion: (token: string, questionId: string, reason: string) =>
+    authedFetch(token, `/questions/${questionId}/report`, {
+      method: "POST",
+      body: JSON.stringify({ reason }),
+    }),
+
   credentialLogin: (username: string, password: string) =>
     fetch(`${API_BASE}/auth/credential/login`, {
       method: "POST",

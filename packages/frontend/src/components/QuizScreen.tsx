@@ -75,6 +75,21 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
     }
   }, [token, sessionId, router]);
 
+  const handleReportQuestion = useCallback(async () => {
+    if (!token || !current) return;
+    const reason = prompt("Maaloo dogoggora jiru barressaa (Describe the mistake in this question):");
+    if (reason === null) return; // User cancelled
+    
+    try {
+      await api.reportQuestion(token, current.id, reason);
+      alert("Gabaasni keessan milkiin ergameera. Galatoomaa! (Report submitted successfully.)");
+      haptics.success();
+    } catch (err) {
+      alert("Gabaasni erguu hin dandeenye. Maaloo deebisaa yaalaa.");
+      haptics.error();
+    }
+  }, [token, current, haptics]);
+
   const goNext = useCallback(() => {
     if (isLast) {
       handleFinishExam();
@@ -211,10 +226,15 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
           </span>
         </div>
         <div className="flex items-center gap-2">
-          {/* Mode badge */}
           <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${mode === "practice" ? "bg-blue-100 text-blue-700" : "bg-indigo-100 text-indigo-700"}`}>
             {mode === "practice" ? "📖 Shaakala" : "📝 Qormaata"}
           </span>
+          <button
+            onClick={handleReportQuestion}
+            className="text-[10px] text-red-500 font-bold bg-red-50 border border-red-150 px-2 py-0.5 rounded-full active:scale-95 transition-all hover:bg-red-100"
+          >
+            ⚠️ Gabaasi
+          </button>
           <span
             className={`font-mono tabular-nums font-medium ${
               isExpired ? "text-red-500" : minutes < 1 ? "text-amber-500" : "text-slate-700"
