@@ -75,7 +75,7 @@ router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
         ...(subject ? { subject } : {}),
         ...(!premium ? { isFree: true } : {}),
       },
-      take: 5
+      ...(premium ? {} : { take: 5 })
     });
   }
 
