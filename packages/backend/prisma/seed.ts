@@ -18,7 +18,7 @@ async function main() {
       options: ["Kaleessa", "Harr'a", "Iftaan", "Kutaa guyyaa dhuftu (Tomorrow)"],
       correctOptionIndex: 3,
       explanation: "Afaan Oromoo keessatti, 'Boru' jechuun guyyaa harr'aatti aanu ykn Guyyaa dhuftu (Tomorrow) jechuudha.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -27,7 +27,7 @@ async function main() {
       options: ["Gootummaa fi seenaa faarsuuf", "Boo'icha qofaaf", "Tapha daa'immaniif", "Sirna gaa'elaaf qofa"],
       correctOptionIndex: 0,
       explanation: "'Geerarsi' sirna aadaa Oromoo keessatti gootummaa, gocha goototaa fi seenaa uummataa faarsuuf kan gargaaru dha.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -948,7 +948,7 @@ async function main() {
       options: ["Receive", "Recieve", "Receve", "Receave"],
       correctOptionIndex: 0,
       explanation: "The correct spelling is 'Receive'. Remember the rule: 'I before E except after C'.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -957,7 +957,7 @@ async function main() {
       options: ["jumps", "quick", "fox", "over"],
       correctOptionIndex: 2,
       explanation: "'fox' and 'dog' are nouns. In the options, 'fox' is the correct noun.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
