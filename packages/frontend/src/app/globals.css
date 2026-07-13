@@ -47,3 +47,12 @@ body {
 .primary-gradient {
   background: linear-gradient(135deg, #0c92e9 0%, #035ca1 100%);
 }
+
+/* Copy and Screenshot Protection */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none; /* Disables long-press callout menu on iOS */
+}

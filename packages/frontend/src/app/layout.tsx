@@ -24,6 +24,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {/* Telegram injects the WebApp script; load it before hydration */}
       <head>
         <script src="https://telegram.org/js/telegram-web-app.js" async />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('contextmenu', e => e.preventDefault());
+              document.addEventListener('keydown', e => {
+                // Prevent F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, and PrintScreen/Ctrl+P
+                if (
+                  e.key === 'F12' ||
+                  (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                  (e.ctrlKey && e.key === 'u') ||
+                  (e.ctrlKey && e.key === 'p')
+                ) {
+                  e.preventDefault();
+                }
+              });
+            `
+          }}
+        />
       </head>
       <body className="bg-white text-slate-900 antialiased overscroll-none">
         <Providers>

@@ -70,7 +70,10 @@ router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
     questions = await prisma.question.findMany({ where: { id: { in: questionIds } } });
   } else {
     questions = await prisma.question.findMany({
-      where: subject ? { subject } : {},
+      where: {
+        ...(subject ? { subject } : {}),
+        ...(!premium ? { isFree: true } : {}),
+      },
       take: 5
     });
   }
