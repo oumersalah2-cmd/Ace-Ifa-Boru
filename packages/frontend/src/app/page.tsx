@@ -192,7 +192,7 @@ export default function Dashboard() {
             <div className="flex flex-col gap-2 px-6 pb-6">
               <button
                 onClick={() => {
-                  window.open("https://t.me/Oumersalah", "_blank");
+                  window.open("https://t.me/Lamifd", "_blank");
                   setShowProfile(false);
                 }}
                 className="w-full py-3 rounded-2xl border border-slate-200 text-slate-700 font-medium text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all hover:bg-slate-50"

@@ -118,12 +118,12 @@ export default function LoginScreen() {
           <p className="text-[10px] text-slate-450 leading-relaxed">
             Koodii seensaa hin qabdan taanaan, Telegram botii keenya qunnamaa:<br />
             <a
-              href="https://t.me/Oumersalah"
+              href="https://t.me/Lamifd"
               target="_blank"
               rel="noreferrer"
               className="text-blue-600 font-semibold hover:underline"
             >
-              @Oumersalah
+              @Lamifd
             </a>
           </p>
         </div>

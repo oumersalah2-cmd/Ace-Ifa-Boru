@@ -65,7 +65,7 @@ async function main() {
       options: ["digrii 360", "digrii 540", "digrii 720", "digrii 900"],
       correctOptionIndex: 2,
       explanation: "Foormulaan (n - 2) * 180 dha. Rog-jaallaa (n=6) ta'eef: (6 - 2) * 180 = 4 * 180 = 720 digrii ta'a.",
-      isFree: false,
+      isFree: true,
     },
 
     // Saayinsii waligalaa Subject
@@ -76,7 +76,7 @@ async function main() {
       options: ["20m", "15m", "9cm", "18m"],
       correctOptionIndex: 1,
       explanation: "Gaaddiddoo lamaan yeroo tokkotti waan uumamaniif, sadarkaan aduu wal-fakkaataadha, kanaafuu rog-sadeewwan lamaan wal-fakkaatu (similar triangles): dheerinni utubaa / gaaddidduu utubaa = dheerinni muka / gaaddidduu muka. h/12 = 5/4 → h = (5×12)/4 = 15m.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "Herrega",
@@ -85,7 +85,7 @@ async function main() {
       options: ["1/4", "1/9", "1/6", "1/36"],
       correctOptionIndex: 1,
       explanation: "Daayii lama darbachuun haala hunda 36 (6×6) qaba. Ida'amni fuulota lamaanii 9 ta'uu kan danda'u: (3,6),(4,5),(5,4),(6,3) — haala 4. Carraan = 4/36 = 1/9.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "Herrega",
@@ -317,7 +317,7 @@ async function main() {
 
     // Saayinsii waligalaa Subject
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Ji'oogiraafii",
       questionText: "Laggeen addunyaa keessaa inni kamtu dheeraa dha?",
       options: ["Laga Amaazoon", "Laga Naayilii (Abbaayyaa)", "Laga Yaangitsee", "Laga Misisiipii"],
@@ -326,7 +326,7 @@ async function main() {
       isFree: true,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Hawaa",
       questionText: "Pilaaneetota sirna solar keessaa 'Red Planet' (Pilaaneetii Diimaa) jedhamuun kan beekamu kami?",
       options: ["Veenus", "Maarsii", "Juupitar", "Saturn"],
@@ -335,7 +335,7 @@ async function main() {
       isFree: true,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Seenaa",
       questionText: "Waraanni Adwaa yoom ta'e, yeroo sana Itoophiyaan Xaaliyaanii koloneeffattuu injifatte?",
       options: ["1889", "1896", "1935", "1941"],
@@ -344,7 +344,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Maayikrooskooppii",
       questionText: "Yoo qubee 'b' maayikirooskooppii jala keenye fakkaattiin qubee kanaa isa kam ta'ee nutti mul'ata?",
       options: ["b", "q", "d", "p"],
@@ -353,7 +353,7 @@ async function main() {
       isFree: true,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Seelota",
       questionText: "Fayidaa isaa wajjin kan sirrii walitti hin firoomne isa kami?",
       options: [
@@ -367,7 +367,7 @@ async function main() {
       isFree: true,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Soorata",
       questionText: "Dammi gosa kaarboohaayidireetii kami?",
       options: [
@@ -381,7 +381,7 @@ async function main() {
       isFree: true,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Soorata",
       questionText: "Kaanneen armaan gadii keessaa kamtu sirrii miti?",
       options: [
@@ -395,7 +395,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Bullaa'insa Nyaataa",
       questionText: "Gosoota nyaataa erga bullaa'anii booda kan itti jijjiiraman sirrii kan hin taane kami?",
       options: [
@@ -409,7 +409,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Sirnakkoo",
       questionText: "Sirnakkoo keessatti qopheessitoonni:",
       options: [
@@ -423,7 +423,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Fotosinteesisi",
       questionText: "Yeroo footoosinteesisii oksijiiniin gara alaatti bahu kam irraa dhufa?",
       options: ["CO₂", "H₂O", "C₆H₁₂O₆", "Hunduma irraa"],
@@ -432,7 +432,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Ramaddii Uumamaa",
       questionText: "Maqaa saayinsii Feelis doomastiikasii jedhu keessatti jechi 'doomastiikasii' jedhu maal bakka bu'a?",
       options: ["Warra", "Oordarii", "Qaccee", "Sanyii"],
@@ -441,7 +441,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Anniisaa Seelii",
       questionText: "Anniisaan qaama keessatti kuufamuudhaan dalagaadhaaf qopheedhi ta'e kami?",
       options: ["ATP", "ADP", "DNA", "AMP"],
@@ -450,7 +450,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Wal-horata",
       questionText: "Zaayigootiin gosa seelii meeqa irraa uumama?",
       options: ["Baay'ee", "1", "2", "4"],
@@ -459,7 +459,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Wal-horata",
       questionText: "Dubartiin waggaa 30 takka Fulbaana 15 marsaa laguu yoo argite, marsaa itti aanu yoom argitii?",
       options: [
@@ -473,7 +473,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Rukkina",
       questionText: "Rukkinni Aluminiyeemii 2.7 g/ml. Qubeen Aluminiyeemii 54g ta'ee meeqaa?",
       options: ["10 ml", "20 ml", "40 ml", "80 ml"],
@@ -482,7 +482,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Kompaawundoota",
       questionText: "Amaloota waliigalaa kompaawundootaa kan hin taane kami?",
       options: [
@@ -496,7 +496,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Foormulaa Keemikaalaa",
       questionText: "Foormulaan keemikaalaa Ayiran(II) Salfeetii isa kami?",
       options: ["Fe₃(SO₃)₂", "FeSO₃", "Fe₃(SO₄)₂", "FeSO₄"],
@@ -505,7 +505,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Atoomii",
       questionText: "Tiyoorii atoomawaa Daaltan keessaa yaadni dogoggora ta'e kami?",
       options: [
@@ -519,7 +519,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Gabatee Peeriyodikii",
       questionText: "Elementiin lakkoofsa atoomaawaa isaa 35 ta'e gabatee peeriyodikii keessatti tarree_ fi garee_ keessatti argama.",
       options: ["4, VA", "5, IVA", "4, VIIA", "7, IVA"],
@@ -528,7 +528,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Alkoolii",
       questionText: "Dhugaatii alkoolii hunduu ____ of keessaa qabu.",
       options: ["Itaanoolii", "Meetaanoolii", "Butaanoolii", "Foormaaliinii"],
@@ -537,7 +537,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Asiidii fi Beezii",
       questionText: "Beezii bishaan dhabeessa kan ta'e kami?",
       options: ["NaOH", "HNO₃", "MgO", "Ca(OH)₂"],
@@ -546,7 +546,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Asiidii fi Beezii",
       questionText: "Oksaayidoota cimdii armaan gadii keessaa bishaan wajjin wal-nyaachuun bulbula beezii kennu isa kami?",
       options: ["SO₂ fi CO₂", "Na₂O fi MgO", "CaO fi SO₃", "Al₂O₃ fi P₂O₃"],
@@ -555,7 +555,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Laaqii",
       questionText: "Biroonziin laaqii _ fi _ ti.",
       options: ["Zn fi Cu", "Cu fi Sn", "Pb fi Sn", "Au fi Ag"],
@@ -564,7 +564,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Amaloota Eelementootaa",
       questionText: "Kan sirrii hin taane kami?",
       options: [
@@ -578,7 +578,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Rukkina",
       questionText: "Rukkina wantootaa (qaamolee fiizikaalaa) armaan gadii ilaalchisee kamtu sirrii dha?",
       options: [
@@ -592,7 +592,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Sochii",
       questionText: "Motorri tokko fageenya 1000m gara dhihaatti yeroo sekondii 30 tti fudhate. Ariitiin motora kanaa meeqa?",
       options: ["0.03m/s", "0.33m/s", "33m/s", "33.3m/s"],
@@ -601,7 +601,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Sochii",
       questionText: "Konkolaataan tokko ariitii wal-fakkaataadhaan yoo deeme guulli isaa maal ta'a?",
       options: ["Ni dabala", "Ni hir'isa", "Wal-fakkaata (0/hin jijjiiramu)", "Guulaa hin qabu"],
@@ -610,7 +610,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Inershiyaa",
       questionText: "Wanti qaamni tokko mormii qaama tokkoo kan haala sochii yookiin boqonnaa isaa keessaa akka turu godhu maali?",
       options: ["Ulfaatina", "Inershiyaa", "Hanga", "Momantamii"],
@@ -619,7 +619,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Humna",
       questionText: "Humni goochaa (F) 'm' taatee guula 'a' irratti hanga walfakkaatuun taatee guulaa dachaa afuriin yoo guddate, humni hammam ta'a?",
       options: ["2F", "F", "4F", "¼F"],
@@ -628,7 +628,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Hojii fi Anniisaa",
       questionText: "Kubbaan tokko anniisaa 24J qaba, yeroo sekondii 3 keessatti yoo socho'e, humni kubbaa kanaa hoiratu meeqa?",
       options: ["26J/s", "12W", "48W", "8W"],
@@ -637,7 +637,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Ho'a",
       questionText: "Kanneen armaan gadii keessaa foormulaa sirriin gulantaalee tempireechara (temperature) gidduu jiru ibsu isa kami?",
       options: ["Tc = 5/9(TF - 32)", "Tc = 5/9(TF + 32)", "Tc = TK + 273", "Hunduu deebii dha"],
@@ -646,7 +646,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Sagalee",
       questionText: "Namni tokko fageenya 's' irraa dhaabatee sagalee dhageessise. Yeroo murtaa'e booda sagaleesaa dhagahe. Fageenyi sagaleen deeme, fageenya isaafi wanta sagalee balaqqeessisu gidduu meeqa?",
       options: ["s", "½ s", "2s", "4s"],
@@ -655,7 +655,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Maagineetiizimii",
       questionText: "Maagineetiin yeroo jalqabaaf argame maal jedhamee beekama?",
       options: ["Koorsaanii", "Dhagaa maagineetii", "Ippiididimisii", "Ujummoo sanyii kormaa"],
@@ -664,7 +664,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Sagalee",
       questionText: "Saffisni sagaleen maatarii keessatti qabu guddina irraa gara xiqqaatti kan agarsiisu isa kami?",
       options: [
@@ -678,7 +678,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Safara",
       questionText: "Meeshaalee safaraa armaan gadii keessaa dheerina safaruuf kan tajaajilu isa kami?",
       options: ["Termoomeetira", "Varniyeer kaalipparii", "Niiwuton meetira", "Ammeetira"],
@@ -687,7 +687,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Safara",
       questionText: "Fageenyi Finfinneedhaa hamma magaalaa Asallaatti jiru 159km yoo ta'e, fageenyi kun ____ m ta'a.",
       options: ["15,900 dam (dekaameetira)", "1,590 dam", "15.9 dam", "1.59 dam"],
@@ -696,7 +696,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Inershiyaa",
       questionText: "Hunma 50N ta'een wanta hangi isaa guddaa ta'e sochoosuurra wanta hanga isaa xiqqaa ta'e sochoosuun salphaa kan ta'eef maaliif?",
       options: [
@@ -710,7 +710,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Humna",
       questionText: "Humni gitamaa hin ta'in wanta hanga isaa 20kg qabu irratti dalagaa'ee yoo guula 4m/s² tiin guulsise, humni irratti dalagaa'e kun hammam ta'a?",
       options: ["5 N", "20 N", "40 N", "80 N"],
@@ -719,7 +719,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Hojii fi Anniisaa",
       questionText: "Baacaan wanta hangi isaa 20kg ta'e irratti hunma 150N dalga dalageessuun fageenya 8m yoo dhiibe, dalagaan wanticha irratti dalageeffame meeqa?",
       options: ["1,600 J", "1.2kJ", "3kJ", "1,200 J"],
@@ -728,7 +728,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Meeshaalee Salphaa",
       questionText: "Saanduqa 60kg ta'e tokko bal'insa habalakaa dheerina 8m fi hojjaa 2m qabu irra sololaachisuun lafatti yoo buufame, reeshiyoon ariitii bal'insa habalakaa meeqa ta'a?",
       options: ["0.25", "4", "8", "16"],
@@ -737,7 +737,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Maagineetiizimii",
       questionText: "Wantoota armaan gadii keessaa kan maagineetiidhaan hin harkifamne isa kami?",
       options: ["Ayiranii", "Nikeelii", "Koopparii", "Koobaaltii"],
@@ -746,7 +746,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Maagineetiizimii",
       questionText: "Seera maagineetiizimii ilaalchisee kanneen armaan gadii keessaa kan sirrii ta'e isa kami?",
       options: [
@@ -760,7 +760,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Humna",
       questionText: "Kanneen armaan gadii keessaa daayimeenshinii humnaa kan ta'e isa kami?",
       options: ["[MLT⁻²]", "[ML²T⁻²]", "[ML²T⁻¹]", "[MLT⁻¹]"],
@@ -769,7 +769,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Dhiibbaa",
       questionText: "Ol ka'iinsi lafa irraa adaduma dabalaa adeemuun dhiibbaan atmoosferii ____.",
       options: ["Dabalaa adeema", "Hin jijjiiramu", "Xiqqaachaa adeema", "Dhaabbataadha"],
@@ -778,7 +778,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Sirna Dhiigaa",
       questionText: "Dhiigni kaarboondaayoksaayidii baay'ee qabate kutaa qaama adda addaa irraa jalqabee, kutaa onnee kam seena?",
       options: [
@@ -792,7 +792,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Biqiltoota",
       questionText: "Albuudota biyyee keessaa guddina biqiltootaaf hamma xiqqaan barbaachisan (mikironutrients) keessaa isa kami?",
       options: ["Foosfarasii", "Pootaasiyeemii", "Kilooriinii", "Naayitirooginii"],
@@ -801,7 +801,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Hawaa",
       questionText: "Aduun kan ijaaramte irraa (elementoota lamaan aduu keessatti baay'inaan argaman)",
       options: [
@@ -815,7 +815,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Argannoo Saayinsii",
       questionText: "Saayintistiin sanyii filatamaa mishingaa goginsa dandamatuufi bishaan xiqqaan omisha guddaa kennuu qabatee argate:",
       options: [
@@ -829,7 +829,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Biqiltoota fi Neefka/Qaama Namaa",
       questionText: "Foormulaan ilkaan nama ga'eessaa tokko 2 1 2 3 / 2 1 2 3 yoo ta'e, baay'inni ilkaan daadee (incisors) hundaa meeqa ta'a?",
       options: ["4", "6", "8", "12"],
@@ -838,7 +838,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Foormulaa Keemikaalaa",
       questionText: "Kompaawundoota armaan gadii keessaa kan maqaan isaa foormulaa waliin sirrii ta'e kami?",
       options: [
@@ -852,7 +852,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Walqixxaatoo Keemikaalaa",
       questionText: "Walqixxaa keemikaalaa NH₃ + O₂ → NO + H₂O madaalamee, koofishaantiin 'H₂O' meeqa ta'a?",
       options: ["3", "4", "5", "6"],
@@ -861,7 +861,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Seelii",
       questionText: "Caasaa seelii keessaa bakki gubamni sooratamaa itti geggeeffamuufi anniisaan seelii itti omishamu isa kami?",
       options: [
@@ -875,7 +875,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Teeknooloojii",
       questionText: "Bu'aa teeknooloojii baayooloojii keessatti itti fayyadamnu kan ta'e kami?",
       options: ["Raadiyoo", "Xiyyaara", "Bilbila", "Inkubeetarii"],
@@ -884,7 +884,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Mikiroo-orgaanizimoota",
       questionText: "Kanneen armaan gadii keessaa faayidaa raacitii (yeast) kan ta'e kami?",
       options: [
@@ -898,7 +898,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Wal-horata",
       questionText: "Qaamolee walhormaataa dhiiraa keessaa sanyii kormaa kuusee tursiisuuf kan gargaaru isa kami?",
       options: [
@@ -912,7 +912,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Fayyaa",
       questionText: "Dhiibbaa 'HIV/AIDS'n hawaasa irraan gahu kan ta'e kami?",
       options: [
@@ -926,7 +926,7 @@ async function main() {
       isFree: false,
     },
     {
-      subject: "Saayinsii waligalaa",
+      subject: "Saayinsii",
       topic: "Wal-horata",
       questionText: "Caasaalee walhormaataa dhalaa namaa irratti iddoo micireen itti dagaaguufi guddatan duubaan kami?",
       options: [

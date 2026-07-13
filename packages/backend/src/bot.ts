@@ -60,9 +60,12 @@ if (bot) {
   // Handler for /approve command (Admin only)
   bot.command("approve", async (ctx) => {
     const senderId = BigInt(ctx.from?.id || 0);
+    const senderUsername = ctx.from?.username?.toLowerCase();
     const adminIdStr = process.env.ADMIN_TELEGRAM_ID;
+    const isAdmin = (adminIdStr && senderId === BigInt(adminIdStr)) ||
+                    senderUsername === "lamifd";
     
-    if (!adminIdStr || senderId !== BigInt(adminIdStr)) {
+    if (!isAdmin) {
       return ctx.reply("❌ Command kun admin qofaafi!");
     }
     
@@ -119,9 +122,12 @@ if (bot) {
   // Handler for /users command (Admin only)
   bot.command("users", async (ctx) => {
     const senderId = BigInt(ctx.from?.id || 0);
+    const senderUsername = ctx.from?.username?.toLowerCase();
     const adminIdStr = process.env.ADMIN_TELEGRAM_ID;
+    const isAdmin = (adminIdStr && senderId === BigInt(adminIdStr)) ||
+                    senderUsername === "lamifd";
     
-    if (!adminIdStr || senderId !== BigInt(adminIdStr)) {
+    if (!isAdmin) {
       return ctx.reply("❌ Command kun admin qofaafi!");
     }
     
@@ -242,7 +248,7 @@ if (bot) {
           `• *Username*: \`${username}\`\n` +
           `• *Password*: \`${password}\`\n\n` +
           `⚠️ _Koodii kana hin dhabinaa ykn nama biraatti hin erginaa!_\n\n` +
-          `📬 Erga kaffaltii raawwattanii booda, ragaa (screenshot) kaffaltii keessanii adminii Telegram (@Oumersalah) irratti nuuf ergaa. Erga mirkanaa'ee booda akka kaffaltiin keessan fudhatamee fi akka koodiin keessan baname (Activate ta'e) isin beeksifna.\n\n` +
+          `📬 Erga kaffaltii raawwattanii booda, ragaa (screenshot) kaffaltii keessanii adminii Telegram (@Lamifd) irratti nuuf ergaa. Erga mirkanaa'ee booda akka kaffaltiin keessan fudhatamee fi akka koodiin keessan baname (Activate ta'e) isin beeksifna.\n\n` +
           `Ammaaf koodii kanaan seentanii shaakaluu ni dandeessu (Sagantaa Bilisaa)!`;
           
         return ctx.reply(responseText, {

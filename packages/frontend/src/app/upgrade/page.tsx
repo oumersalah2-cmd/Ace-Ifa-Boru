@@ -24,7 +24,7 @@ export default function UpgradeScreen() {
   const handleUpgrade = async () => {
     // We can keep the manual unlock logic for testing or admin use if needed,
     // but in a real manual payment flow, the user contacts the admin.
-    window.open("https://t.me/Oumersalah", "_blank"); // Example link to admin
+    window.open("https://t.me/Lamifd", "_blank"); // Example link to admin
   };
 
   const features = [
