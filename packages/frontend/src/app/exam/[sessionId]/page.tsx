@@ -9,6 +9,8 @@ interface Question {
   id: string;
   questionText: string;
   options: string[];
+  correctOptionIndex?: number;
+  explanation?: string;
 }
 
 // In this route the session was already created (e.g. from the category

@@ -15,6 +15,7 @@ interface Question {
   questionText: string;
   options: string[];
   correctOptionIndex?: number;
+  explanation?: string;
 }
 
 interface QuizScreenProps {
@@ -260,22 +261,45 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
       <div className="flex flex-col gap-3">
         {current.options.map((option, i) => {
           const isSelected = selected === i;
+          const showAnswerFeedback = mode === "practice" && selected !== undefined;
+          const isCorrect = current.correctOptionIndex === i;
+          const isWrongSelected = isSelected && !isCorrect;
+
+          let btnClass = "border-slate-200 bg-white text-slate-700";
+          let badgeClass = "border-slate-300";
+          let badgeSymbol = String.fromCharCode(65 + i);
+
+          if (showAnswerFeedback) {
+            if (isCorrect) {
+              btnClass = "border-emerald-500 bg-emerald-50 text-emerald-900 pointer-events-none";
+              badgeClass = "border-emerald-600 bg-emerald-600 text-white";
+              badgeSymbol = "✓";
+            } else if (isWrongSelected) {
+              btnClass = "border-red-500 bg-red-50 text-red-900 pointer-events-none";
+              badgeClass = "border-red-600 bg-red-600 text-white";
+              badgeSymbol = "✗";
+            } else {
+              btnClass = "border-slate-100 bg-slate-50/50 text-slate-400 opacity-60 pointer-events-none";
+              badgeClass = "border-slate-200 text-slate-350";
+            }
+          } else {
+            if (isSelected) {
+              btnClass = "border-blue-600 bg-blue-50 text-blue-900";
+              badgeClass = "border-blue-600 bg-blue-600 text-white";
+              badgeSymbol = "✓";
+            }
+          }
+
           return (
             <button
               key={i}
               onClick={() => selectOption(i)}
-              className={`text-left rounded-xl border px-4 py-3 text-sm transition-all active:scale-[0.98]
-                ${isSelected
-                  ? "border-blue-600 bg-blue-50 text-blue-900"
-                  : "border-slate-200 bg-white text-slate-700"
-                }`}
+              disabled={showAnswerFeedback}
+              className={`text-left rounded-xl border px-4 py-3 text-sm transition-all active:scale-[0.98] ${btnClass}`}
             >
               <span className="inline-flex items-center gap-2">
-                <span
-                  className={`w-5 h-5 shrink-0 rounded-full border flex items-center justify-center text-[10px]
-                    ${isSelected ? "border-blue-600 bg-blue-600 text-white" : "border-slate-300"}`}
-                >
-                  {isSelected ? "✓" : String.fromCharCode(65 + i)}
+                <span className={`w-5 h-5 shrink-0 rounded-full border flex items-center justify-center text-[10px] ${badgeClass}`}>
+                  {badgeSymbol}
                 </span>
                 {option}
               </span>
@@ -283,6 +307,16 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
           );
         })}
       </div>
+
+      {/* Explanation container (only in practice mode when answered) */}
+      {mode === "practice" && selected !== undefined && current.explanation && (
+        <div className="mt-5 p-4 rounded-2xl bg-amber-50 border border-amber-100 text-slate-700 text-xs leading-relaxed animate-scale-in">
+          <div className="font-bold text-amber-800 flex items-center gap-1 mb-1.5 text-[10px] uppercase tracking-wider">
+            💡 Ibsa Qabxii (Explanation)
+          </div>
+          {current.explanation}
+        </div>
+      )}
 
       {/* Autosave feedback — hidden in exam mode */}
       <div className="mt-4 h-5 text-xs">
