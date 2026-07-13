@@ -12,6 +12,14 @@ export const bot = botToken ? new Bot(botToken) : null;
 const registrationStates = new Map<bigint, { step: number }>();
 
 if (bot) {
+  // Set bot commands programmatically on start
+  bot.api.setMyCommands([
+    { command: "start", description: "Launch the Exam platform" },
+    { command: "register", description: "Register a custom login account (username/password)" },
+    { command: "stats", description: "View your quiz performance statistics" },
+    { command: "premium", description: "Learn about premium membership benefits" },
+  ]).catch((err) => console.error("Failed to set bot commands:", err));
+
   // Handler for /start command
   bot.command("start", async (ctx) => {
     const telegramId = BigInt(ctx.from?.id || 0);
