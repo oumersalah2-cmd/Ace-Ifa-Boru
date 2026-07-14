@@ -1,4 +1,6 @@
 // backend/src/index.ts
+import "dotenv/config";
+
 // Add support for BigInt serialization to prevent JSON.stringify crashes
 (BigInt.prototype as any).toJSON = function () {
   return this.toString();
