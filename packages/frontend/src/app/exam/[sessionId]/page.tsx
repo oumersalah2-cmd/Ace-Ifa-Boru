@@ -37,12 +37,16 @@ export default function ExamSessionPage({ params }: { params: { sessionId: strin
         if (!res.ok) throw new Error("Could not load exam session");
         const session = await res.json();
 
-        const loaded: Question[] = [];
-        for (const qId of session.questionIds as string[]) {
-          const qRes = await fetch(`${base}/questions/${qId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          if (qRes.ok) loaded.push(await qRes.json());
+        let loaded: Question[] = [];
+        if (session.questions) {
+          loaded = session.questions;
+        } else {
+          for (const qId of session.questionIds as string[]) {
+            const qRes = await fetch(`${base}/questions/${qId}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (qRes.ok) loaded.push(await qRes.json());
+          }
         }
 
         setQuestions(loaded);

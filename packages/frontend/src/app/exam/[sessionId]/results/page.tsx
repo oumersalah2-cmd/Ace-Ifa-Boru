@@ -54,13 +54,17 @@ export default function ResultsScreen({ params }: { params: { sessionId: string 
         setSession(sessionData);
 
         // Fetch questions
-        const loaded: Question[] = [];
-        for (const qId of sessionData.questionIds as string[]) {
-          const qRes = await fetch(`${base}/questions/${qId}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          if (qRes.ok) {
-            loaded.push(await qRes.json());
+        let loaded: Question[] = [];
+        if (sessionData.questions) {
+          loaded = sessionData.questions;
+        } else {
+          for (const qId of sessionData.questionIds as string[]) {
+            const qRes = await fetch(`${base}/questions/${qId}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (qRes.ok) {
+              loaded.push(await qRes.json());
+            }
           }
         }
         setQuestions(loaded);

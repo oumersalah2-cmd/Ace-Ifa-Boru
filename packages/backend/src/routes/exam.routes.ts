@@ -113,7 +113,18 @@ router.get("/exam-sessions/:id", async (req: AuthedRequest, res: Response) => {
     return res.status(404).json({ error: "not_found" });
   }
 
-  return res.json(session);
+  const qIds = session.questionIds as string[];
+  const questions = await prisma.question.findMany({
+    where: { id: { in: qIds } }
+  });
+
+  // Preserve the order of questions as stored in questionIds
+  const orderedQuestions = qIds.map(id => questions.find(q => q.id === id)).filter(Boolean);
+
+  return res.json({
+    ...session,
+    questions: orderedQuestions
+  });
 });
 
 /**
