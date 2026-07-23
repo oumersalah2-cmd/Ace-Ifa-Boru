@@ -1,5 +1,5 @@
 // backend/src/bot.ts
-import { Bot, InlineKeyboard } from "grammy";
+import { Bot, InlineKeyboard, Keyboard } from "grammy";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
@@ -50,15 +50,33 @@ if (bot) {
 
     const appUrl = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
 
-    const keyboard = new InlineKeyboard()
-      .webApp("🚀 Launch Exam Platform", appUrl)
+    const boardKeyboard = new Keyboard()
+      .webApp("🚀 Launch App", appUrl)
       .row()
-      .text("📝 Register Browser Account", "register_account");
+      .text("📝 Galmaa'i")
+      .text("❓ Deggarsaaf")
+      .resized();
 
     await ctx.reply(welcomeText, {
       parse_mode: "Markdown",
-      reply_markup: keyboard,
+      reply_markup: boardKeyboard,
     });
+  });
+
+  // Handler for bottom keyboard "📝 Galmaa'i" (Register)
+  bot.hears("📝 Galmaa'i", async (ctx) => {
+    const telegramId = BigInt(ctx.from?.id || 0);
+    registrationStates.set(telegramId, { step: 1 });
+    await ctx.reply("📝 *Registraashinii Kaffaltii Ace-Ifa-Boru*\n\nMaqaa guutuu keessan nuuf barreessaa (Fakkeenya: Caalaa Bulchaa):", { parse_mode: "Markdown" });
+  });
+
+  // Handler for bottom keyboard "❓ Deggarsaaf" (Help/Support)
+  bot.hears("❓ Deggarsaaf", async (ctx) => {
+    const helpText = `❓ *Gargaarsaafi Deggarsaaf*\n\n` +
+      `Ace-Ifa-Boru irratti rakkoo ykn gaaffii qabduuf admin qunnamaa:\n\n` +
+      `👤 *Telegram Admin*: @Lamifd\n\n` +
+      `Maaloo ragaa kaffaltii (screenshot) keessan erguuf ykn gaaffii dabalataaf admin qunnamaa. Isin gargaaruuf qophiidha!`;
+    await ctx.reply(helpText, { parse_mode: "Markdown" });
   });
 
   // Handler for /register command (Credential Users)
