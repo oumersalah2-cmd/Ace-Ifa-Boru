@@ -175,20 +175,21 @@ if (bot) {
       await ctx.reply(`✅ User *${username}* Premium ta'ee banameera! (Guyyoota 90f / Ji'oota 3f)`, { parse_mode: "Markdown" });
       
       // Send notification to the user if they registered via Telegram
-      if (user.telegramChatId) {
+      const chatId = targetUser?.telegramChatId || telegramUser?.telegramId;
+      if (chatId) {
         const appUrl = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
         const loginUrl = `${appUrl}/login`;
         const keyboard = new InlineKeyboard().webApp("🚀 Launch Exam Platform", loginUrl);
         
         try {
           await bot.api.sendMessage(
-            Number(user.telegramChatId),
+            Number(chatId),
             `🎉 *Kaffaltiin Keessan Mirkanaa'eera!*\n\n` +
             `Koodiin keessan *${username}* guutummaatti Premium ta'ee banameera. Amma qormaata hunda daangaa malee fayyadamuu ni dandeessu. Barnoota Gaarii!`,
             { parse_mode: "Markdown", reply_markup: keyboard }
           );
         } catch (e) {
-          console.warn(`Could not notify user ${user.telegramChatId}:`, e);
+          console.warn(`Could not notify user ${chatId}:`, e);
         }
       }
     } catch (err) {
