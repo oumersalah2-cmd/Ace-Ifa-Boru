@@ -57,21 +57,21 @@ router.get("/paywall/check", async (req: AuthedRequest, res: Response) => {
  */
 router.post("/paywall/upgrade", async (req: AuthedRequest, res: Response) => {
   try {
-    const thirtyDaysFromNow = new Date();
-    thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+    const ninetyDaysFromNow = new Date();
+    ninetyDaysFromNow.setDate(ninetyDaysFromNow.getDate() + 90);
 
     if (req.credentialUserId) {
       const updatedUser = await prisma.credentialUser.update({
         where: { id: req.credentialUserId },
         data: {
           isPremium: true,
-          premiumUntil: thirtyDaysFromNow,
+          premiumUntil: ninetyDaysFromNow,
         },
       });
 
       return res.json({
         success: true,
-        message: "Premium access granted for 30 days!",
+        message: "Premium access granted for 90 days!",
         user: {
           id: updatedUser.id,
           isPremium: updatedUser.isPremium,
@@ -84,13 +84,13 @@ router.post("/paywall/upgrade", async (req: AuthedRequest, res: Response) => {
       where: { telegramId: req.telegramId! },
       data: {
         isPremium: true,
-        premiumUntil: thirtyDaysFromNow,
+        premiumUntil: ninetyDaysFromNow,
       },
     });
 
     return res.json({
       success: true,
-      message: "Premium access granted for 30 days!",
+      message: "Premium access granted for 90 days!",
       user: {
         telegramId: updatedUser.telegramId.toString(),
         isPremium: updatedUser.isPremium,

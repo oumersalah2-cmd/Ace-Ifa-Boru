@@ -83,8 +83,8 @@ if (bot) {
     }
     
     try {
-      const thirtyDaysFromNow = new Date();
-      thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+      const ninetyDaysFromNow = new Date();
+      ninetyDaysFromNow.setDate(ninetyDaysFromNow.getDate() + 90);
       
       const user = await prisma.credentialUser.findUnique({
         where: { username }
@@ -98,11 +98,11 @@ if (bot) {
         where: { username },
         data: {
           isPremium: true,
-          premiumUntil: thirtyDaysFromNow
+          premiumUntil: ninetyDaysFromNow
         }
       });
       
-      await ctx.reply(`✅ User *${username}* Premium ta'ee banameera! (Guyyoota 30f)`, { parse_mode: "Markdown" });
+      await ctx.reply(`✅ User *${username}* Premium ta'ee banameera! (Guyyoota 90f / Ji'oota 3f)`, { parse_mode: "Markdown" });
       
       // Send notification to the user if they registered via Telegram
       if (user.telegramChatId) {
