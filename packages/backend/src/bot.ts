@@ -50,7 +50,10 @@ if (bot) {
 
     const appUrl = process.env.FRONTEND_ORIGIN || "http://localhost:3000";
 
-    const keyboard = new InlineKeyboard().webApp("🚀 Launch Exam Platform", appUrl);
+    const keyboard = new InlineKeyboard()
+      .webApp("🚀 Launch Exam Platform", appUrl)
+      .row()
+      .text("📝 Register Browser Account", "register_account");
 
     await ctx.reply(welcomeText, {
       parse_mode: "Markdown",
@@ -62,6 +65,14 @@ if (bot) {
   bot.command("register", async (ctx) => {
     const telegramId = BigInt(ctx.from?.id || 0);
     registrationStates.set(telegramId, { step: 1 });
+    await ctx.reply("📝 *Registraashinii Kaffaltii Ace-Ifa-Boru*\n\nMaqaa guutuu keessan nuuf barreessaa (Fakkeenya: Caalaa Bulchaa):", { parse_mode: "Markdown" });
+  });
+
+  // Handler for registration button callback query
+  bot.callbackQuery("register_account", async (ctx) => {
+    const telegramId = BigInt(ctx.from?.id || 0);
+    registrationStates.set(telegramId, { step: 1 });
+    await ctx.answerCallbackQuery();
     await ctx.reply("📝 *Registraashinii Kaffaltii Ace-Ifa-Boru*\n\nMaqaa guutuu keessan nuuf barreessaa (Fakkeenya: Caalaa Bulchaa):", { parse_mode: "Markdown" });
   });
 
