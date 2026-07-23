@@ -94,7 +94,7 @@ router.post("/exam-sessions", async (req: AuthedRequest, res: Response) => {
       subject,
       questionIds: allowedIds,
       currentAnswers: {},
-      expiresAt: new Date(Date.now() + 10 * 60 * 1000), // 10 min exam window
+      expiresAt: new Date(Date.now() + 60 * 60 * 1000), // 60 min exam window
     },
   });
 
