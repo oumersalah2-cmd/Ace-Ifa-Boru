@@ -242,7 +242,14 @@ function AuthBridge({ children }: { children: ReactNode }) {
       error: null,
       user: null,
     });
-    router.push("/login");
+    
+    // If in Telegram, reload page to restore Telegram identity auth automatically
+    const isTg = typeof window !== "undefined" && (window as any).Telegram?.WebApp?.initData;
+    if (isTg) {
+      window.location.reload();
+    } else {
+      router.push("/login");
+    }
   };
 
   // Show splash while loading

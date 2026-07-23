@@ -214,6 +214,19 @@ export default function Dashboard() {
                 </button>
               )}
 
+              {!isPremium && typeof window !== "undefined" && !sessionStorage.getItem("credential_token") && (
+                <button
+                  onClick={() => {
+                    router.push("/login");
+                    setShowProfile(false);
+                  }}
+                  className="w-full py-3 rounded-2xl border border-blue-100 bg-blue-50 text-blue-700 font-semibold text-sm flex items-center justify-center gap-2 active:scale-[0.98] transition-all hover:bg-blue-100"
+                >
+                  <Lock className="w-4 h-4" />
+                  Koodiidhaan Seeni (Login with Credentials)
+                </button>
+              )}
+
               {/* Sign Out — always visible */}
               <button
                 onClick={() => {
