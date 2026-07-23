@@ -37,8 +37,15 @@ router.post("/auth/telegram", async (req: Request, res: Response) => {
   const { user } = verified;
   const telegramId = BigInt(user.id);
 
-  // Upsert user — never trust is_premium/premium_until from the client;
-  // those are only ever set by your payment webhook, never here.
+  // Check if there is an approved CredentialUser linked to this Telegram ID
+  const linkedCredUser = await prisma.credentialUser.findFirst({
+    where: { telegramChatId: telegramId, isPremium: true },
+  });
+
+  const shouldBePremium = !!linkedCredUser;
+  const premiumUntil = linkedCredUser ? linkedCredUser.premiumUntil : null;
+
+  // Upsert user — copy premium status from linked credential account if verified
   const dbUser = await prisma.user.upsert({
     where: { telegramId },
     update: {
@@ -47,6 +54,7 @@ router.post("/auth/telegram", async (req: Request, res: Response) => {
       lastName: user.last_name,
       languageCode: user.language_code,
       photoUrl: user.photo_url,
+      ...(shouldBePremium ? { isPremium: true, premiumUntil } : {}),
     },
     create: {
       telegramId,
@@ -55,6 +63,8 @@ router.post("/auth/telegram", async (req: Request, res: Response) => {
       lastName: user.last_name,
       languageCode: user.language_code,
       photoUrl: user.photo_url,
+      isPremium: shouldBePremium,
+      premiumUntil,
     },
   });
 
