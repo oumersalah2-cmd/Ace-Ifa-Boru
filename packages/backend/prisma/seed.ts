@@ -16,8 +16,8 @@ async function main() {
       topic: "Set 1: Caasluga, Dubbisaafi Afoola",
       questionText: "Dureettiifi Burqaan 'barattoota kutaa sagaliiti'. Hima kana keessatti kan jala sararame (barattoota kutaa sagaliiti) maali?",
       options: ["Gaalee maqibsaati", "Gaalee durduubeeti", "Gaalee gochimaati", "Gaalee maqaati"],
-      correctOptionIndex: 3,
-      explanation: "Gaaleen 'barattoota kutaa sagaliiti' jedhu maqaa (barattoota) irratti waan hundaa'uuf gaalee maqaati.",
+      correctOptionIndex: 2,
+      explanation: "Gaaleen 'barattoota kutaa sagaliiti' jedhu dhumarratti dhamjecha dhumee '-ti' (dha/copula verb) waan qabuuf akka gaalee gochimaatti (Verb Phrase) tajaajila.",
       isFree: false,
     },
     {
@@ -428,8 +428,8 @@ async function main() {
       topic: "Set 2: Seerluga, Mammaaksaafi Hubannoo Dubbisaa",
       questionText: "Kutaalee xalayaa keessaa dhimma xalayicha akka barreessinuuf nu kakaaseefi dhimma barreessuu barbaanne itti dhiyeessinu maal jedhama?",
       options: ["Teessoo", "Keeyyata seenessaa", "Qaama", "Cufaa"],
-      correctOptionIndex: 2,
-      explanation: "Qaamni xalayaa (Body of the letter) iddoo ergaaniifi dhimmi guddaan xalayichaa itti barreeffamuudha.",
+      correctOptionIndex: 1,
+      explanation: "Keeyyata seenessaa (introductory paragraph) keessatti dhimma xalayicha barreessuuf nu kakaase ykn sababa isaa ibsinee seensaa goona.",
       isFree: false,
     },
     {
