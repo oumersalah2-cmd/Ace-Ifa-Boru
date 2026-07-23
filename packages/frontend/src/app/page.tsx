@@ -315,7 +315,7 @@ export default function Dashboard() {
                     </span>
                   ) : (
                     <span className="bg-black/20 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
-                      <Lock className="w-2.5 h-2.5" /> {(subject.name === "Herrega" || subject.name === "Saayinsii") ? "5 Bilisaa" : "Cufameera"}
+                      <Lock className="w-2.5 h-2.5" /> {subject.name === "Afaan Oromoo" ? "Cufameera" : "5 Bilisaa"}
                     </span>
                   )}
                 </div>
@@ -329,10 +329,10 @@ export default function Dashboard() {
                   <div className="flex items-center justify-between text-[10px] text-slate-400 font-medium">
                     <span className="bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full flex items-center gap-1">
                       <BookOpen className="w-3 h-3" />
-                      {isPremium ? "Gaaffilee Hunda" : (subject.name === "Herrega" || subject.name === "Saayinsii") ? "5 Gaaffilee" : "Premium Qofa"}
+                      {isPremium ? "Gaaffilee Hunda" : subject.name === "Afaan Oromoo" ? "Premium Qofa" : "5 Gaaffilee"}
                     </span>
                     <span className={isPremium ? "text-amber-600 font-bold flex items-center gap-0.5" : "text-emerald-600 font-bold"}>
-                      {isPremium ? <><Crown className="w-3 h-3 fill-amber-600" /> Premium</> : (subject.name === "Herrega" || subject.name === "Saayinsii") ? "Bilisaa" : "Premium"}
+                      {isPremium ? <><Crown className="w-3 h-3 fill-amber-600" /> Premium</> : subject.name === "Afaan Oromoo" ? "Premium" : "Bilisaa"}
                     </span>
                   </div>
                   <button
