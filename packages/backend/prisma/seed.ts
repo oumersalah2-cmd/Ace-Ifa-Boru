@@ -940,32 +940,285 @@ async function main() {
       isFree: false,
     },
 
-    // English Subject
+    // English Subject (Ifa Boru and ODA Special Boarding Secondary Schools Grade 9 Entrance Examination)
     {
       subject: "English",
-      topic: "Spelling",
-      questionText: "Choose the correct spelling:",
-      options: ["Receive", "Recieve", "Receve", "Receave"],
-      correctOptionIndex: 0,
-      explanation: "The correct spelling is 'Receive'. Remember the rule: 'I before E except after C'.",
-      isFree: false,
-    },
-    {
-      subject: "English",
-      topic: "Grammar",
-      questionText: "Identify the noun in the sentence: 'The quick brown fox jumps over the lazy dog.'",
-      options: ["jumps", "quick", "fox", "over"],
+      topic: "Section 1: Reading Comprehension (Walia Ibex passage)",
+      questionText: "As an Ethiopian citizen, what do you think is expected from us?",
+      options: [
+        "Make effort to deforest their habitat",
+        "Do nothing",
+        "Make effort to conserve",
+        "Do something to resettle them"
+      ],
       correctOptionIndex: 2,
-      explanation: "'fox' and 'dog' are nouns. In the options, 'fox' is the correct noun.",
+      explanation: "The passage says conservation efforts are crucial for the Walia Ibex's survival, and calls it a symbol of the balance between humans and nature. This implies citizens should support conservation, not destroy habitat (A), remain passive (B), or relocate the animals (D, which isn't mentioned anywhere in the passage).",
+      isFree: true,
+    },
+    {
+      subject: "English",
+      topic: "Section 1: Reading Comprehension",
+      questionText: "What makes Walia Ibex unique animal?",
+      options: [
+        "Popular everywhere",
+        "No more existing",
+        "Only males are poached",
+        "Rare species"
+      ],
+      correctOptionIndex: 3,
+      explanation: "The passage opens by describing the Walia Ibex as 'a rare species of Ibex' and later notes 'only a few hundred Walias left in the wild.' This directly supports 'Rare species.' It is not popular everywhere (A), it still exists (B is false), and poaching is mentioned as a general threat, not specific to males only (C).",
+      isFree: true,
+    },
+    {
+      subject: "English",
+      topic: "Section 1: Reading Comprehension",
+      questionText: "Which one of the following is NOT mentioned as a cause for the disappearance of Walia Ibex?",
+      options: [
+        "Reproducing them in laboratories",
+        "Poaching",
+        "Habitat loss",
+        "Competition with domestic livestock"
+      ],
+      correctOptionIndex: 0,
+      explanation: "The passage lists exactly three causes: 'Habitat loss, competition with domestic livestock, and poaching.' Laboratory reproduction is never mentioned in the passage at all — in fact it would be a conservation method, not a cause of disappearance. So A is correctly the one NOT mentioned.",
       isFree: false,
     },
     {
       subject: "English",
-      topic: "Punctuation",
-      questionText: "Choose the sentence with the correct punctuation:",
-      options: ["Its a beautiful day.", "It's a beautiful day.", "Its' a beautiful day.", "Itis a beautiful day."],
+      topic: "Section 1: Reading Comprehension",
+      questionText: "When do male Walias rejoin the group?",
+      options: [
+        "During migration",
+        "During mating season",
+        "When they attack their enemy",
+        "When they graze"
+      ],
       correctOptionIndex: 1,
-      explanation: "'It's' is a contraction of 'It is', which requires an apostrophe.",
+      explanation: "The passage states directly: 'Mature males may lead more lonely lives but stay close to the herd, rejoining during the mating season.' This is an explicit statement in the text, so B is correct.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 1: Reading Comprehension - Vocabulary in context",
+      questionText: "The word 'mature' in paragraph 2 means __.",
+      options: [
+        "young",
+        "old",
+        "infant",
+        "undeveloped"
+      ],
+      correctOptionIndex: 1,
+      explanation: "'Mature' describes adult animals that have fully grown/developed — the closest meaning among the choices is 'old' (as opposed to young/infant/undeveloped). In context, 'mature males' are contrasted with the general herd, implying fully-grown adults.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 1: Reading Comprehension - Vocabulary in context",
+      questionText: "The word 'which' in paragraph 1 refers to __.",
+      options: [
+        "Horn",
+        "Females",
+        "Males",
+        "Walias"
+      ],
+      correctOptionIndex: 0,
+      explanation: "The sentence reads: 'Males are particularly famous for their impressive horns, which are reach up to 110 cm in length.' The pronoun 'which' immediately follows and refers back to 'horns' — it is the horns that reach up to 110cm, not the males, females, or Walias generally.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 2: Vocabulary in Context",
+      questionText: "The principal decided to postpone the staff meeting until next Friday due to the urgent workshop. What does the word 'postpone' mean?",
+      options: [
+        "cancel",
+        "put off",
+        "speed up",
+        "organize"
+      ],
+      correctOptionIndex: 1,
+      explanation: "To 'postpone' something means to delay it or schedule it for a later time. The phrasal verb 'put off' has the exact same meaning.",
+      isFree: true,
+    },
+    {
+      subject: "English",
+      topic: "Section 2: Vocabulary in Context",
+      questionText: "She has an intense passion for reading science fiction novels. The word 'intense' is closest in meaning to __.",
+      options: [
+        "weak",
+        "temporary",
+        "strong",
+        "unusual"
+      ],
+      correctOptionIndex: 2,
+      explanation: "'Intense' means very strong, extreme, or acute. In this context, an intense passion is a very strong passion.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 2: Vocabulary in Context",
+      questionText: "The NGO provided essential food items to the drought-affected families. The opposite of the word 'essential' is __.",
+      options: [
+        "unnecessary",
+        "important",
+        "valuable",
+        "crucial"
+      ],
+      correctOptionIndex: 0,
+      explanation: "'Essential' means absolutely necessary or extremely important. The opposite (antonym) is 'unnecessary' (not needed).",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 3: Grammar",
+      questionText: "If the rain ________, we will go out for a walk in the afternoon.",
+      options: [
+        "stop",
+        "stops",
+        "stopped",
+        "will stop"
+      ],
+      correctOptionIndex: 1,
+      explanation: "This is a Type 1 Conditional sentence (possible future condition). The 'if'-clause uses the simple present tense ('stops' for the singular subject 'the rain'), and the main clause uses 'will + verb'.",
+      isFree: true,
+    },
+    {
+      subject: "English",
+      topic: "Section 3: Grammar",
+      questionText: "Yesterday, while I ________ my homework, the lights went out suddenly.",
+      options: [
+        "do",
+        "was doing",
+        "did",
+        "have done"
+      ],
+      correctOptionIndex: 1,
+      explanation: "We use the Past Continuous ('was doing') for an ongoing past action that was interrupted by a shorter action in the simple past ('went out').",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 3: Grammar",
+      questionText: "Bontu has been studying at Ifa Boru Boarding School ________ 2024.",
+      options: [
+        "for",
+        "since",
+        "until",
+        "during"
+      ],
+      correctOptionIndex: 1,
+      explanation: "We use 'since' with the present perfect continuous tense to refer to a specific starting point in time (the year 2024).",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 3: Grammar",
+      questionText: "The English exam paper ________ by the teachers right now.",
+      options: [
+        "is preparing",
+        "is prepared",
+        "is being prepared",
+        "prepared"
+      ],
+      correctOptionIndex: 2,
+      explanation: "The sentence requires the Present Continuous Passive voice ('is being prepared') because the exam paper is the receiver of the action, and 'right now' indicates an action in progress.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 3: Grammar",
+      questionText: "This is the student ________ father is a famous surgeon in the referral hospital.",
+      options: [
+        "who",
+        "whom",
+        "whose",
+        "which"
+      ],
+      correctOptionIndex: 2,
+      explanation: "'Whose' is a possessive relative pronoun used to show that the father belongs to or is related to the student.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 4: Dialogue Completion",
+      questionText: "Gadaa: 'Could you lend me your dictionary for a moment?'\nChaltu: '________, here it is.'",
+      options: [
+        "Of course",
+        "I am sorry",
+        "No, thank you",
+        "I don't think so"
+      ],
+      correctOptionIndex: 0,
+      explanation: "'Of course' is a polite way to agree to a request, followed naturally by 'here it is' as she hands over the dictionary.",
+      isFree: true,
+    },
+    {
+      subject: "English",
+      topic: "Section 4: Dialogue Completion",
+      questionText: "Teacher: 'Well done, Tolasa! You scored 100% on the boarding school entrance exam.'\nTolasa: '________'",
+      options: [
+        "No problem",
+        "Thank you very much",
+        "Never mind",
+        "I am glad to hear that"
+      ],
+      correctOptionIndex: 1,
+      explanation: "When someone praises or congratulates you, the standard polite response is to say 'Thank you very much'.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 5: Spelling",
+      questionText: "Which one of the following words is spelled correctly?",
+      options: [
+        "Definately",
+        "Definitely",
+        "Definitly",
+        "Deffinately"
+      ],
+      correctOptionIndex: 1,
+      explanation: "The correct spelling is 'Definitely' (spelled with an 'i' after 'n').",
+      isFree: true,
+    },
+    {
+      subject: "English",
+      topic: "Section 6: Punctuation",
+      questionText: "Which of the following sentences has the correct punctuation?",
+      options: [
+        "Yes I will come with you to the school library.",
+        "Yes, I will come with you to the school library.",
+        "Yes, I will come with you, to the school library",
+        "Yes I will come with you, to the school library."
+      ],
+      correctOptionIndex: 1,
+      explanation: "A comma should be used after introductory words like 'Yes' or 'No' at the beginning of a sentence.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 7: Paragraph/Sentence Ordering",
+      questionText: "Put these sentences in the correct order to make a meaningful paragraph:\n1. Finally, she went to bed feeling satisfied.\n2. First, she completed all her assignments.\n3. After that, she watched a educational video.\n4. Aster had a very busy evening.",
+      options: [
+        "4,2,3,1",
+        "4,3,2,1",
+        "2,3,4,1",
+        "2,4,3,1"
+      ],
+      correctOptionIndex: 0,
+      explanation: "The paragraph should start with the topic sentence (4 - Aster had a busy evening). Then, sequence transition words help order the rest: 'First' (2), 'After that' (3), and 'Finally' (1). This gives 4,2,3,1.",
+      isFree: false,
+    },
+    {
+      subject: "English",
+      topic: "Section 7: Paragraph/Sentence Ordering",
+      questionText: "Put these sentences in the correct order to make an organized paragraph:\n1. His speech was very interesting.\n2. He advised the students to work hard to be successful in their education.\n3. Last week there was a meeting in our school.\n4. It was addressed by our director and students.",
+      options: [
+        "3,4,1,2",
+        "1,3,4,2",
+        "1,3,2,4",
+        "3,4,2,1"
+      ],
+      correctOptionIndex: 0,
+      explanation: "Logical narrative order: first set the scene (3 - there was a meeting), then say who spoke (4 - addressed by director/students), then describe the speech (1 - it was interesting), then what was said in it (2 - he advised students). This gives: 3,4,1,2 — a coherent story that flows from event → speaker → quality of speech → content of speech.",
       isFree: false,
     }
   ];
