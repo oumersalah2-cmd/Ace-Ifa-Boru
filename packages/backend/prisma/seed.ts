@@ -18,7 +18,7 @@ async function main() {
       options: ["Gaalee maqibsaati", "Gaalee durduubeeti", "Gaalee gochimaati", "Gaalee maqaati"],
       correctOptionIndex: 3,
       explanation: "Gaaleen 'barattoota kutaa sagaliiti' jedhu maqaa (barattoota) irratti waan hundaa'uuf gaalee maqaati.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -255,7 +255,7 @@ async function main() {
       options: ["haadha", "haadhaaf", "huccuu", "bite"],
       correctOptionIndex: 2,
       explanation: "Hima kana keessatti wanti kallattiin bitame 'huccuu' (Direct Object) dha. 'Haadhaaf' aantima alkallattii (Indirect Object) dha.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -445,11 +445,11 @@ async function main() {
     // Herrega Subject
     {
       subject: "Herrega",
-      topic: "Dental Formula (Biology Math)",
-      questionText: "Foormulaa ilkaan nama ga'eessaa kan agarsiisu kami?",
-      options: ["3131/3121", "2123/2123", "0233/1233", "3232/3232"],
+      topic: "Aljebraa",
+      questionText: "Yoo f(x) = 2x + 5 fi g(x) = x - 3 ta'an, f(g(4)) meeqa ta'a?",
+      options: ["5", "7", "13", "11"],
       correctOptionIndex: 1,
-      explanation: "Foormulaan ilkaan nama ga'eessaa 2123/2123 dha. Kunis (Incisors: 2, Canines: 1, Premolars: 2, Molars: 3) gubbaa fi jalaa gama tokkoon kan ibsudha. Walumaagalaan ilkaan 32 ta'u.",
+      explanation: "Jalqaba g(4) barbaadna: g(4) = 4 - 3 = 1. Sana booda f(1) barbaadna: f(1) = 2(1) + 5 = 7.",
       isFree: true,
     },
     {
@@ -719,6 +719,15 @@ async function main() {
     },
 
     // Saayinsii waligalaa Subject
+    {
+      subject: "Saayinsii",
+      topic: "Biqiltoota fi Neefka/Qaama Namaa",
+      questionText: "Foormulaa ilkaan nama ga'eessaa kan agarsiisu kami?",
+      options: ["3131/3121", "2123/2123", "0233/1233", "3232/3232"],
+      correctOptionIndex: 1,
+      explanation: "Foormulaan ilkaan nama ga'eessaa 2123/2123 dha. Kunis (Incisors: 2, Canines: 1, Premolars: 2, Molars: 3) gubbaa fi jalaa gama tokkoon kan ibsudha. Walumaagalaan ilkaan 32 ta'u.",
+      isFree: false,
+    },
     {
       subject: "Saayinsii",
       topic: "Ji'oogiraafii",
