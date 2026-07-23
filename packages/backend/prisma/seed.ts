@@ -50,7 +50,7 @@ async function main() {
       options: ["Hima callaa", "Hima murtaawaa", "Hima ijoo", "Hima goolabaa"],
       correctOptionIndex: 2,
       explanation: "Hima ijoon (topic sentence) yaada bu'uuraa ykn handhuura keeyyatichaa kan of keessatti qabatuudha.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -109,7 +109,7 @@ async function main() {
       options: ["Maalummaa afaanii", "Guddina afaanii", "afaaniifi uummata", "mallattoo ta'uu afaanii"],
       correctOptionIndex: 0,
       explanation: "Barreeffamichi guutuun isaa afaan maali, hayyuuleen akkamitti ibsu, akkasumas faayidaan isaa maal akka ta'e waan addeessuuf, mata dureen mijataan 'Maalummaa Afaanii' dha.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -164,7 +164,7 @@ async function main() {
       options: ["Fuula fokkise", "Jibbe", "Gammade", "Finniisa godhate"],
       correctOptionIndex: 1,
       explanation: "Namni tokko 'fuula bade' yoo jedhamu, haalli dhiyaateef waan itti hin tolleef ykn waan aareef ifaajee fuula isaaratti agarsiise jechuudha.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -228,7 +228,7 @@ async function main() {
       options: ["Gaalee durduubee", "Gaalee maqaa", "Gaalee maqibsaa", "Gaalee gochimaa"],
       correctOptionIndex: 3,
       explanation: "Gaaleen kun gochima (kufee) irratti waan hundaa'uuf, akka gaalee gochimaatti (Verb Phrase) fudhatama.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -334,7 +334,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "Filannoowwan B, C, fi D hundi isaanii obsaafi haala yeroof jiru danda'anii dabarsuurratti xiyyeeffatu. 'A' garuu waa'ee nama gowwoomsuu agarsiisa.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "Afaan Oromoo",
@@ -1393,7 +1393,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "The passage lists exactly three causes: 'Habitat loss, competition with domestic livestock, and poaching.' Laboratory reproduction is never mentioned in the passage at all — in fact it would be a conservation method, not a cause of disappearance. So A is correctly the one NOT mentioned.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1407,7 +1407,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "The passage states directly: 'Mature males may lead more lonely lives but stay close to the herd, rejoining during the mating season.' This is an explicit statement in the text, so B is correct.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1421,7 +1421,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "'Mature' describes adult animals that have fully grown/developed — the closest meaning among the choices is 'old' (as opposed to young/infant/undeveloped). In context, 'mature males' are contrasted with the general herd, implying fully-grown adults.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1435,7 +1435,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "The sentence reads: 'Males are particularly famous for their impressive horns, which are reach up to 110 cm in length.' The pronoun 'which' immediately follows and refers back to 'horns' — it is the horns that reach up to 110cm, not the males, females, or Walias generally.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1463,7 +1463,7 @@ async function main() {
       ],
       correctOptionIndex: 2,
       explanation: "'Intense' means very strong, extreme, or acute. In this context, an intense passion is a very strong passion.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1477,7 +1477,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "'Essential' means absolutely necessary or extremely important. The opposite (antonym) is 'unnecessary' (not needed).",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1505,7 +1505,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "We use the Past Continuous ('was doing') for an ongoing past action that was interrupted by a shorter action in the simple past ('went out').",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1519,7 +1519,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "We use 'since' with the present perfect continuous tense to refer to a specific starting point in time (the year 2024).",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1533,7 +1533,7 @@ async function main() {
       ],
       correctOptionIndex: 2,
       explanation: "The sentence requires the Present Continuous Passive voice ('is being prepared') because the exam paper is the receiver of the action, and 'right now' indicates an action in progress.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1547,7 +1547,7 @@ async function main() {
       ],
       correctOptionIndex: 2,
       explanation: "'Whose' is a possessive relative pronoun used to show that the father belongs to or is related to the student.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1575,7 +1575,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "When someone praises or congratulates you, the standard polite response is to say 'Thank you very much'.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1603,7 +1603,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "A comma should be used after introductory words like 'Yes' or 'No' at the beginning of a sentence.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1617,7 +1617,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "The paragraph should start with the topic sentence (4 - Aster had a busy evening). Then, sequence transition words help order the rest: 'First' (2), 'After that' (3), and 'Finally' (1). This gives 4,2,3,1.",
-      isFree: false,
+      isFree: true,
     },
     {
       subject: "English",
@@ -1631,7 +1631,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "Logical narrative order: first set the scene (3 - there was a meeting), then say who spoke (4 - addressed by director/students), then describe the speech (1 - it was interesting), then what was said in it (2 - he advised students). This gives: 3,4,1,2 — a coherent story that flows from event → speaker → quality of speech → content of speech.",
-      isFree: false,
+      isFree: true,
     }
   ];
 
