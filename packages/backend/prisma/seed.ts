@@ -1393,7 +1393,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "The passage lists exactly three causes: 'Habitat loss, competition with domestic livestock, and poaching.' Laboratory reproduction is never mentioned in the passage at all — in fact it would be a conservation method, not a cause of disappearance. So A is correctly the one NOT mentioned.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1407,7 +1407,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "The passage states directly: 'Mature males may lead more lonely lives but stay close to the herd, rejoining during the mating season.' This is an explicit statement in the text, so B is correct.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1421,7 +1421,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "'Mature' describes adult animals that have fully grown/developed — the closest meaning among the choices is 'old' (as opposed to young/infant/undeveloped). In context, 'mature males' are contrasted with the general herd, implying fully-grown adults.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1435,7 +1435,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "The sentence reads: 'Males are particularly famous for their impressive horns, which are reach up to 110 cm in length.' The pronoun 'which' immediately follows and refers back to 'horns' — it is the horns that reach up to 110cm, not the males, females, or Walias generally.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1463,7 +1463,7 @@ async function main() {
       ],
       correctOptionIndex: 2,
       explanation: "'Intense' means very strong, extreme, or acute. In this context, an intense passion is a very strong passion.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1477,7 +1477,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "'Essential' means absolutely necessary or extremely important. The opposite (antonym) is 'unnecessary' (not needed).",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1505,7 +1505,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "We use the Past Continuous ('was doing') for an ongoing past action that was interrupted by a shorter action in the simple past ('went out').",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1519,7 +1519,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "We use 'since' with the present perfect continuous tense to refer to a specific starting point in time (the year 2024).",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1533,7 +1533,7 @@ async function main() {
       ],
       correctOptionIndex: 2,
       explanation: "The sentence requires the Present Continuous Passive voice ('is being prepared') because the exam paper is the receiver of the action, and 'right now' indicates an action in progress.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1547,7 +1547,7 @@ async function main() {
       ],
       correctOptionIndex: 2,
       explanation: "'Whose' is a possessive relative pronoun used to show that the father belongs to or is related to the student.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1575,7 +1575,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "When someone praises or congratulates you, the standard polite response is to say 'Thank you very much'.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1589,7 +1589,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "The correct spelling is 'Definitely' (spelled with an 'i' after 'n').",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1603,7 +1603,7 @@ async function main() {
       ],
       correctOptionIndex: 1,
       explanation: "A comma should be used after introductory words like 'Yes' or 'No' at the beginning of a sentence.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1617,7 +1617,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "The paragraph should start with the topic sentence (4 - Aster had a busy evening). Then, sequence transition words help order the rest: 'First' (2), 'After that' (3), and 'Finally' (1). This gives 4,2,3,1.",
-      isFree: true,
+      isFree: false,
     },
     {
       subject: "English",
@@ -1631,7 +1631,7 @@ async function main() {
       ],
       correctOptionIndex: 0,
       explanation: "Logical narrative order: first set the scene (3 - there was a meeting), then say who spoke (4 - addressed by director/students), then describe the speech (1 - it was interesting), then what was said in it (2 - he advised students). This gives: 3,4,1,2 — a coherent story that flows from event → speaker → quality of speech → content of speech.",
-      isFree: true,
+      isFree: false,
     }
   ];
 
