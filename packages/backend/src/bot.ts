@@ -97,21 +97,62 @@ if (bot) {
       const ninetyDaysFromNow = new Date();
       ninetyDaysFromNow.setDate(ninetyDaysFromNow.getDate() + 90);
       
-      const user = await prisma.credentialUser.findUnique({
+      const targetUser = await prisma.credentialUser.findUnique({
         where: { username }
       });
       
-      if (!user) {
-        return ctx.reply(`❌ User '${username}' hin argamne.`);
-      }
+      let telegramUser = null;
       
-      await prisma.credentialUser.update({
-        where: { username },
-        data: {
-          isPremium: true,
-          premiumUntil: ninetyDaysFromNow
+      if (targetUser) {
+        await prisma.credentialUser.update({
+          where: { username },
+          data: {
+            isPremium: true,
+            premiumUntil: ninetyDaysFromNow
+          }
+        });
+        
+        // Also update the linked Telegram User in the User table
+        if (targetUser.telegramChatId) {
+          try {
+            await prisma.user.update({
+              where: { telegramId: BigInt(targetUser.telegramChatId) },
+              data: {
+                isPremium: true,
+                premiumUntil: ninetyDaysFromNow
+              }
+            });
+          } catch (e) {
+            console.warn(`Could not update linked Telegram User ${targetUser.telegramChatId}:`, e);
+          }
         }
-      });
+      } else {
+        // Try looking up directly in User table by username or telegramId
+        const cleanUsername = username.replace(/^@/, "");
+        const isNumeric = /^\d+$/.test(cleanUsername);
+        
+        if (isNumeric) {
+          telegramUser = await prisma.user.findUnique({
+            where: { telegramId: BigInt(cleanUsername) }
+          });
+        } else {
+          telegramUser = await prisma.user.findFirst({
+            where: { username: { equals: cleanUsername, mode: "insensitive" } }
+          });
+        }
+        
+        if (!telegramUser) {
+          return ctx.reply(`❌ User '${username}' hin argamne (Could not find user in CredentialUser or User table).`);
+        }
+        
+        await prisma.user.update({
+          where: { telegramId: telegramUser.telegramId },
+          data: {
+            isPremium: true,
+            premiumUntil: ninetyDaysFromNow
+          }
+        });
+      }
       
       await ctx.reply(`✅ User *${username}* Premium ta'ee banameera! (Guyyoota 90f / Ji'oota 3f)`, { parse_mode: "Markdown" });
       
