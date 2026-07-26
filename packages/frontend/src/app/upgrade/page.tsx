@@ -106,14 +106,16 @@ export default function UpgradeScreen() {
       <div className="bg-white rounded-2xl border border-slate-150 p-5 mb-6 flex flex-col gap-4">
         <h3 className="text-sm font-bold text-slate-900">Akkaataa Kaffaltii (Payment Options)</h3>
         
-        <div className="flex flex-col gap-2 p-3 bg-blue-50 rounded-xl border border-blue-100">
+        <div className="flex flex-col gap-1 p-3 bg-blue-50 rounded-xl border border-blue-100">
           <span className="text-xs font-bold text-blue-900">Baankii Daldala Itoophiyaa (CBE)</span>
           <span className="text-lg font-black text-blue-700 tracking-wide">1000551443489</span>
+          <span className="text-[10px] text-blue-600 font-semibold">Maqaa: Abdusalam Oumer</span>
         </div>
 
-        <div className="flex flex-col gap-2 p-3 bg-green-50 rounded-xl border border-green-100">
+        <div className="flex flex-col gap-1 p-3 bg-green-50 rounded-xl border border-green-100">
           <span className="text-xs font-bold text-green-900">Telebirr</span>
           <span className="text-lg font-black text-green-700 tracking-wide">0934978247</span>
+          <span className="text-[10px] text-green-600 font-semibold">Maqaa: Abdusalam Oumer</span>
         </div>
 
         <p className="text-xs text-slate-500 leading-relaxed mt-2">

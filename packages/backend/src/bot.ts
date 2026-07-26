@@ -323,6 +323,9 @@ if (bot) {
         
         const responseText = `🎉 *Registraashiniin Milkiin Xumurameera!*\n\n` +
           `Amanannaan qormaata keessan dabruuf kaffaltii 200 Birr raawwadhaa.\n\n` +
+          `💳 *Odeeffannoo Kaffaltii (Payment Details)*:\n` +
+          `• *Baankii Daldala Itoophiyaa (CBE)*: \`1000551443489\` (*Abdusalam Oumer*)\n` +
+          `• *Telebirr*: \`0934978247\` (*Abdusalam Oumer*)\n\n` +
           `🔑 *Koodii Seensaa Keessan*:\n` +
           `• *Username*: \`${username}\`\n` +
           `• *Password*: \`${password}\`\n\n` +
