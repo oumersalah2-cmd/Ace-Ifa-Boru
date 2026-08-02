@@ -1,7 +1,7 @@
 // src/components/QuizScreen.tsx
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { api, PaywallError } from "@/lib/api";
 import { useAuth } from "@/app/providers";
@@ -31,6 +31,60 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
   const router = useRouter();
   const { token } = useAuth();
   const haptics = useHaptics();
+
+  useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    const handleCopy = (e: ClipboardEvent) => {
+      e.preventDefault();
+      alert("⚠️ Gaaffilee garagalchuun ykn waraabuun dhorkaadha! (Copying questions is disabled.)");
+    };
+
+    const handleCut = (e: ClipboardEvent) => {
+      e.preventDefault();
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const isCopyCombo = (e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C');
+      const isCutCombo = (e.ctrlKey || e.metaKey) && (e.key === 'x' || e.key === 'X');
+      const isPrintCombo = (e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P');
+      const isSaveCombo = (e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S');
+      const isDevToolsCombo = e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'i' || e.key === 'I'));
+
+      if (isCopyCombo || isCutCombo) {
+        e.preventDefault();
+        alert("⚠️ Gaaffilee garagalchuun ykn waraabuun dhorkaadha! (Copying questions is disabled.)");
+      } else if (isPrintCombo) {
+        e.preventDefault();
+        alert("⚠️ Qormaata print gochuun dhorkaadha! (Printing is disabled.)");
+      } else if (isSaveCombo || isDevToolsCombo) {
+        e.preventDefault();
+      }
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'PrintScreen') {
+        navigator.clipboard.writeText('');
+        alert("⚠️ Qormaata waraabuun/kaameraadhaan kaasun dhorkaadha! (Screenshots are disabled.)");
+      }
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("copy", handleCopy);
+    document.addEventListener("cut", handleCut);
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("copy", handleCopy);
+      document.removeEventListener("cut", handleCut);
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
 
   const [mode, setMode] = useState<QuizMode>("practice");
   const [modeConfirmed, setModeConfirmed] = useState(false);
@@ -212,7 +266,7 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
   if (!current) return null;
 
   return (
-    <div className="flex flex-col h-full px-4 pt-4 pb-safe">
+    <div className="flex flex-col h-full px-4 pt-4 pb-safe select-none" style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}>
       {/* Progress + timer */}
       <div className="flex items-center justify-between mb-3 text-xs text-slate-500">
         <div className="flex items-center gap-2">
