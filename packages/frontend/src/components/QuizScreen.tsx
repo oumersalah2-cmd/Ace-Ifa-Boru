@@ -29,8 +29,9 @@ type QuizMode = "practice" | "exam";
 
 export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps) {
   const router = useRouter();
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const haptics = useHaptics();
+  const [isBlurred, setIsBlurred] = useState(false);
 
   useEffect(() => {
     const handleContextMenu = (e: MouseEvent) => {
@@ -71,11 +72,21 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
       }
     };
 
+    const handleBlur = () => {
+      setIsBlurred(true);
+    };
+
+    const handleFocus = () => {
+      // Allow returning to the app
+    };
+
     document.addEventListener("contextmenu", handleContextMenu);
     document.addEventListener("copy", handleCopy);
     document.addEventListener("cut", handleCut);
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("blur", handleBlur);
+    window.addEventListener("focus", handleFocus);
 
     return () => {
       document.removeEventListener("contextmenu", handleContextMenu);
@@ -83,6 +94,8 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
       document.removeEventListener("cut", handleCut);
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      window.removeEventListener("blur", handleBlur);
+      window.removeEventListener("focus", handleFocus);
     };
   }, []);
 
@@ -265,8 +278,44 @@ export function QuizScreen({ sessionId, questions, examEndsAt }: QuizScreenProps
 
   if (!current) return null;
 
+  if (modeConfirmed && mode === "exam" && isBlurred) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-slate-900 text-white p-6 text-center select-none">
+        <span className="text-4xl mb-4">⚠️</span>
+        <h2 className="text-xl font-bold mb-2">Qormaata Keessan Cufameera!</h2>
+        <p className="text-sm text-slate-400 max-w-xs leading-relaxed">
+          Qormaata dhiistanii ba'uun ykn screenshot kaasuun dhorkaadha. Qormaata keessaniitti deebi'uuf button gadii tuqaa.
+        </p>
+        <p className="text-xs text-slate-500 mt-2">
+          (Leaving the exam screen or taking screenshots is prohibited. Click the button below to resume.)
+        </p>
+        <button
+          onClick={() => setIsBlurred(false)}
+          className="mt-6 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition-all active:scale-95"
+        >
+          Qormaata Deebisi (Resume Exam)
+        </button>
+      </div>
+    );
+  }
+
+  const watermarkText = user 
+    ? `${user.firstName || ""} ${user.username ? `@${user.username}` : ""} (${user.telegramId || ""})`.trim()
+    : "Ace Ifa Boru";
+
   return (
-    <div className="flex flex-col h-full px-4 pt-4 pb-safe select-none" style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}>
+    <div className="flex flex-col h-full px-4 pt-4 pb-safe select-none relative overflow-hidden" style={{ userSelect: 'none', WebkitUserSelect: 'none', MozUserSelect: 'none', msUserSelect: 'none' }}>
+      {/* Watermark Overlay */}
+      <div className="pointer-events-none fixed inset-0 z-0 flex flex-wrap items-center justify-center overflow-hidden opacity-[0.04] select-none">
+        {Array.from({ length: 16 }).map((_, idx) => (
+          <div
+            key={idx}
+            className="w-1/2 text-center text-[10px] font-black -rotate-12 uppercase tracking-widest whitespace-nowrap p-8 text-slate-500"
+          >
+            {watermarkText}
+          </div>
+        ))}
+      </div>
       {/* Progress + timer */}
       <div className="flex items-center justify-between mb-3 text-xs text-slate-500">
         <div className="flex items-center gap-2">

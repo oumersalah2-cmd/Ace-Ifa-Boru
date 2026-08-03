@@ -56,3 +56,9 @@ body {
   user-select: none;
   -webkit-touch-callout: none; /* Disables long-press callout menu on iOS */
 }
+
+@media print {
+  body, html, #__next, .flex {
+    display: none !important;
+  }
+}
