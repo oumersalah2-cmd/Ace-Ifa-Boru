@@ -15,6 +15,7 @@ import examRoutes from "./routes/exam.routes";
 import paywallRoutes from "./routes/paywall.routes";
 import analyticsRoutes from "./routes/analytics.routes";
 import { bot } from "./bot";
+import { run } from "@grammyjs/runner";
 
 const app = express();
 
@@ -49,12 +50,11 @@ app.listen(PORT, () => {
 
   // Start the grammY Telegram bot asynchronously if configured
   if (bot) {
-    bot.start({
-      onStart(botInfo) {
-        console.log(`Telegram Bot @${botInfo.username} is running...`);
-      },
-    }).catch((err) => {
+    try {
+      run(bot);
+      console.log("Telegram Bot is running concurrently (via grammY runner)...");
+    } catch (err) {
       console.error("Failed to start Telegram Bot:", err);
-    });
+    }
   }
 });

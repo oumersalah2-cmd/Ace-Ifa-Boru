@@ -301,7 +301,7 @@ if (bot) {
       const randStr = Math.random().toString(36).substring(2, 7);
       const username = `ifaboru_${randStr}`;
       const password = `IFA-${Math.floor(1000 + Math.random() * 9000)}`;
-      const passwordHash = await bcrypt.hash(password, 10);
+      const passwordHash = await bcrypt.hash(password, 8);
       
       try {
         await prisma.credentialUser.create({
