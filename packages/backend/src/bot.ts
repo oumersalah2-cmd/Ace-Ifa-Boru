@@ -357,7 +357,15 @@ if (bot) {
     await ctx.reply(text, { parse_mode: "Markdown" });
   });
 
+  bot.catch((err) => {
+    const ctx = err.ctx;
+    console.error(`Error while handling update ${ctx.update.update_id}:`);
+    const e = err.error;
+    console.error("Bot error details:", e);
+  });
+
   console.log("Telegram Bot client configured.");
 } else {
   console.log("TELEGRAM_BOT_TOKEN not provided. Bot skipped.");
 }
+
