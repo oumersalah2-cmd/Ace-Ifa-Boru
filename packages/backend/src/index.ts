@@ -52,7 +52,7 @@ app.listen(PORT, () => {
   if (bot) {
     try {
       const runner = run(bot);
-      runner.task().catch((err) => {
+      runner.task()?.catch((err) => {
         console.error("Telegram bot runner error:", err);
       });
       console.log("Telegram Bot is running concurrently (via grammY runner)...");
