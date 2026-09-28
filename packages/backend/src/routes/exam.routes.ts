@@ -3,7 +3,7 @@
 import { Router, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import { requireAuth, AuthedRequest } from "../middleware/requireAuth";
-import { bot } from "../bot";
+import { bot, escapeHtml } from "../bot";
 
 const prisma = new PrismaClient();
 const router = Router();
@@ -192,15 +192,16 @@ router.post("/questions/:id/report", async (req: AuthedRequest, res: Response) =
 
   if (bot && process.env.ADMIN_TELEGRAM_ID) {
     try {
-      const message = `⚠️ *GAFFFII GABAASAME (Question Reported)*\n\n` +
-        `👤 *User*: ${reporterName} (${reporterUsername})\n` +
-        `📚 *Subject*: ${question.subject}\n` +
-        `🎯 *Topic*: ${question.topic}\n\n` +
-        `❓ *Question*: "${question.questionText}"\n` +
-        `💡 *Reason*: ${reason || "No reason specified"}\n\n` +
-        `_Please review this question for any mistakes._`;
+      const adminId = process.env.ADMIN_TELEGRAM_ID.trim();
+      const message = `⚠️ <b>GAFFFII GABAASAME (Question Reported)</b>\n\n` +
+        `👤 <b>User</b>: ${escapeHtml(reporterName)} (${escapeHtml(reporterUsername)})\n` +
+        `📚 <b>Subject</b>: ${escapeHtml(question.subject)}\n` +
+        `🎯 <b>Topic</b>: ${escapeHtml(question.topic)}\n\n` +
+        `❓ <b>Question</b>: "${escapeHtml(question.questionText)}"\n` +
+        `💡 <b>Reason</b>: ${escapeHtml(reason || "No reason specified")}\n\n` +
+        `<i>Please review this question for any mistakes.</i>`;
       
-      await bot.api.sendMessage(Number(process.env.ADMIN_TELEGRAM_ID), message, { parse_mode: "Markdown" });
+      await bot.api.sendMessage(adminId, message, { parse_mode: "HTML" });
     } catch (err) {
       console.error("Failed to notify admin of report:", err);
     }

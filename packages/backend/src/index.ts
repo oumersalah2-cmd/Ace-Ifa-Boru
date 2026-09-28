@@ -51,10 +51,15 @@ app.listen(PORT, () => {
   // Start the grammY Telegram bot asynchronously if configured
   if (bot) {
     try {
-      run(bot);
+      const runner = run(bot);
+      runner.task().catch((err) => {
+        console.error("Telegram bot runner error:", err);
+      });
       console.log("Telegram Bot is running concurrently (via grammY runner)...");
     } catch (err) {
       console.error("Failed to start Telegram Bot:", err);
     }
+  } else {
+    console.log("Telegram Bot not initialized (TELEGRAM_BOT_TOKEN not provided in .env).");
   }
 });
